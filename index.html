@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4338CA" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>big-history-lab · visual timelines, S-curves &amp; the acceleration of innovation</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, { delimiters: [{left:'$$', right:'$$', display:true},{left:'$', right:'$', display:false}], ignoredTags: ['option','script','textarea'] })"></script>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="title">
+        <span class="dot"></span><strong>big-history-lab</strong>
+        <span class="sub">thresholds · time · S-curves · acceleration · ideas</span>
+      </div>
+      <nav>
+        <a href="#thresholds">thresholds</a>
+        <a href="#scrub">cosmic clock</a>
+        <a href="#scurve">S-curves</a>
+        <a href="#accel">acceleration</a>
+        <a href="#pop">population</a>
+        <a href="#ideas">idea map</a>
+        <a href="#complexity">complexity</a>
+        <a href="#revolutions">revolutions</a>
+        <a href="#learning">collective learning</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 1. EIGHT THRESHOLDS -->
+      <section class="demo" id="thresholds">
+        <h2>1. Big History — the eight thresholds</h2>
+        <p class="cap">Big History organises 13.8 billion years into eight moments where new complexity appeared,
+          each needing its own "Goldilocks conditions." Click a threshold on the timeline to read its detail.
+          The bar is drawn on a logarithmic time axis, so the last sliver holds all of human history.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-thr" width="600" height="320"></canvas></div>
+          <div class="ctrls">
+            <label>threshold
+              <select id="thr-sel">
+                <option value="0">1 · Big Bang</option>
+                <option value="1">2 · Stars light up</option>
+                <option value="2">3 · New chemical elements</option>
+                <option value="3">4 · Earth &amp; solar system</option>
+                <option value="4">5 · Life on Earth</option>
+                <option value="5">6 · Humans &amp; collective learning</option>
+                <option value="6">7 · Agriculture</option>
+                <option value="7">8 · Modern revolution</option>
+              </select>
+            </label>
+            <div class="readout"><span>when</span><strong id="thr-when" class="mono">—</strong></div>
+            <div class="readout"><span>new complexity</span><strong id="thr-what" class="mono big">—</strong></div>
+            <p class="hint" id="thr-desc"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. COSMIC CLOCK / TIME SCRUB -->
+      <section class="demo" id="scrub">
+        <h2>2. Cosmic clock — scrub 13.8 Bya to today</h2>
+        <p class="cap">Compress all of time into a single year (the "Cosmic Calendar"). Drag the slider to move
+          through history and watch how almost everything humans ever did is crammed into the final seconds
+          of December 31. Recency dominates — the modern era is a blink.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-scrub" width="600" height="300"></canvas></div>
+          <div class="ctrls">
+            <label>years before present <span class="mono" id="scr-yv">—</span>
+              <input id="scr-y" type="range" min="0" max="1000" step="1" value="120"/></label>
+            <label class="check"><input id="scr-log" type="checkbox" checked/> logarithmic time</label>
+            <div class="readout"><span>date (real)</span><strong id="scr-real" class="mono">—</strong></div>
+            <div class="readout"><span>cosmic calendar</span><strong id="scr-cal" class="mono big">—</strong></div>
+            <div class="readout"><span>era</span><strong id="scr-era" class="mono">—</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. S-CURVES / DIFFUSION -->
+      <section class="demo" id="scurve">
+        <h2>3. Diffusion of innovation — adoption S-curves</h2>
+        <p class="cap">New technologies spread slowly, then explode, then saturate — a logistic S-curve
+          $f(t)=\dfrac{1}{1+e^{-k(t-t_0)}}$. Compare the telephone, radio, TV, mobile and the smartphone, and
+          tune the steepness to see how diffusion has sped up over the centuries.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-scurve" width="600" height="320"></canvas></div>
+          <div class="ctrls">
+            <label>technology
+              <select id="sc-tech">
+                <option value="0">telephone (1876→)</option>
+                <option value="1">radio (1920→)</option>
+                <option value="2">television (1950→)</option>
+                <option value="3" selected>mobile phone (1990→)</option>
+                <option value="4">smartphone (2007→)</option>
+              </select>
+            </label>
+            <label>steepness $k$ <span class="mono" id="sc-kv">1.0</span>
+              <input id="sc-k" type="range" min="20" max="300" step="1" value="100"/></label>
+            <label>midpoint shift (yrs) <span class="mono" id="sc-mv">0</span>
+              <input id="sc-m" type="range" min="-20" max="20" step="1" value="0"/></label>
+            <div class="readout"><span>years to 10→90%</span><strong id="sc-span" class="mono">—</strong></div>
+            <div class="readout"><span>at midpoint</span><strong id="sc-mid" class="mono big">50%</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. EXPONENTIAL ACCELERATION -->
+      <section class="demo" id="accel">
+        <h2>4. Accelerating returns — exponential vs linear</h2>
+        <p class="cap">Kurzweil's "law of accelerating returns": innovation compounds, so capability grows
+          exponentially, $N(t)=N_0\,(1+r)^{t}$. Moore's-law-style doubling looks like a wall on a linear axis
+          but a straight line in log scale. Toggle the axis to feel the difference.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-accel" width="600" height="320"></canvas></div>
+          <div class="ctrls">
+            <label>doubling time (months) <span class="mono" id="ac-dv">24</span>
+              <input id="ac-d" type="range" min="6" max="48" step="1" value="24"/></label>
+            <label>span (years) <span class="mono" id="ac-sv">50</span>
+              <input id="ac-s" type="range" min="10" max="80" step="1" value="50"/></label>
+            <label class="check"><input id="ac-log" type="checkbox"/> logarithmic y-axis</label>
+            <div class="readout"><span>growth / year</span><strong id="ac-rate" class="mono">—</strong></div>
+            <div class="readout"><span>total factor</span><strong id="ac-fac" class="mono big">—</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. POPULATION GROWTH -->
+      <section class="demo" id="pop">
+        <h2>5. World population through history</h2>
+        <p class="cap">Population stayed almost flat for millennia, then leapt at each great innovation:
+          agriculture, the scientific and industrial revolutions, and modern medicine. Drag the marker to read
+          the estimate and which threshold drove the jump. A log scale reveals the deeper structure.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-pop" width="600" height="320"></canvas></div>
+          <div class="ctrls">
+            <label>year <span class="mono" id="pop-yv">2020</span>
+              <input id="pop-y" type="range" min="-10000" max="2020" step="10" value="2020"/></label>
+            <label class="check"><input id="pop-log" type="checkbox" checked/> logarithmic population</label>
+            <div class="readout"><span>population</span><strong id="pop-val" class="mono big">—</strong></div>
+            <div class="readout"><span>driver</span><strong id="pop-drv" class="mono">—</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. IDEA INFLUENCE MAP -->
+      <section class="demo" id="ideas">
+        <h2>6. The map of ideas &amp; innovations</h2>
+        <p class="cap">Ideas build on earlier ones. Click any node to highlight what fed into it and what it
+          made possible — a small genealogy of innovation from writing to artificial intelligence, in the
+          spirit of Joler's <em>Calculating Empires</em>.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-ideas" width="600" height="360"></canvas></div>
+          <div class="ctrls">
+            <div class="readout"><span>selected</span><strong id="id-sel" class="mono big">—</strong></div>
+            <div class="readout"><span>builds on</span><strong id="id-in" class="mono">—</strong></div>
+            <div class="readout"><span>enables</span><strong id="id-out" class="mono">—</strong></div>
+            <button id="id-clear" class="btn">clear</button>
+            <p class="hint">Arrows point from an idea to what it made possible.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. RISING COMPLEXITY / GOLDILOCKS -->
+      <section class="demo" id="complexity">
+        <h2>7. Rising complexity &amp; Goldilocks conditions</h2>
+        <p class="cap">Each threshold creates more complex structures with denser flows of energy — but only in
+          narrow "Goldilocks" windows: too cold and nothing forms, too hot and it falls apart. Move the
+          conditions and watch how much complexity can survive.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-cx" width="600" height="320"></canvas></div>
+          <div class="ctrls">
+            <label>energy flow / temperature <span class="mono" id="cx-tv">50</span>
+              <input id="cx-t" type="range" min="0" max="100" step="1" value="50"/></label>
+            <label>time elapsed <span class="mono" id="cx-gv">60</span>
+              <input id="cx-g" type="range" min="0" max="100" step="1" value="60"/></label>
+            <div class="readout"><span>zone</span><strong id="cx-zone" class="mono big">—</strong></div>
+            <div class="readout"><span>complexity index</span><strong id="cx-idx" class="mono">—</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. SCIENTIFIC REVOLUTIONS TIMELINE -->
+      <section class="demo" id="revolutions">
+        <h2>8. Revolutions of science &amp; technology — pan &amp; zoom</h2>
+        <p class="cap">A pannable, zoomable timeline of major turning points from the syllabus, Stone-Age tools
+          to ChatGPT. Drag to pan, use the zoom slider to expand a span. Click an event to read it. Notice the
+          events bunch ever tighter toward the present.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-rev" width="600" height="320"></canvas></div>
+          <div class="ctrls">
+            <label>zoom <span class="mono" id="rev-zv">1.0×</span>
+              <input id="rev-z" type="range" min="10" max="400" step="1" value="10"/></label>
+            <label>center year <span class="mono" id="rev-cv">1000</span>
+              <input id="rev-c" type="range" min="-3000" max="2025" step="5" value="1000"/></label>
+            <div class="readout"><span>event</span><strong id="rev-ev" class="mono big">—</strong></div>
+            <div class="readout"><span>year</span><strong id="rev-yr" class="mono">—</strong></div>
+            <p class="hint" id="rev-desc"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. COLLECTIVE LEARNING -->
+      <section class="demo" id="learning">
+        <h2>9. Collective learning — information compounds</h2>
+        <p class="cap">Humans are unique in <em>collective learning</em>: each generation passes on more than it
+          received, so knowledge accumulates. With more minds and better media (writing, print, internet) the
+          stock of shared information snowballs. Tune the channels and population to see the stock grow.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-cl" width="600" height="320"></canvas></div>
+          <div class="ctrls">
+            <label>connected minds <span class="mono" id="cl-pv">50</span>
+              <input id="cl-p" type="range" min="2" max="100" step="1" value="50"/></label>
+            <label>medium
+              <select id="cl-med">
+                <option value="0">oral / memory</option>
+                <option value="1">writing</option>
+                <option value="2" selected>printing press</option>
+                <option value="3">internet</option>
+              </select>
+            </label>
+            <label>loss / forgetting <span class="mono" id="cl-lv">10%</span>
+              <input id="cl-l" type="range" min="0" max="60" step="1" value="10"/></label>
+            <div class="readout"><span>retention</span><strong id="cl-ret" class="mono">—</strong></div>
+            <div class="readout"><span>stock after 40 gens</span><strong id="cl-stock" class="mono big">—</strong></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>big-history-lab — Andrea Montana · IE BCSAI</span>
+      <span class="more">
+        <a href="https://github.com/andreaisabelmontana/calc-lab"  target="_blank">calc-lab</a>
+        <a href="https://github.com/andreaisabelmontana/stats-lab" target="_blank">stats-lab</a>
+        <a href="https://github.com/andreaisabelmontana/discrete-math-lab" target="_blank">discrete-math-lab</a>
+        <a href="https://github.com/andreaisabelmontana/big-history-lab" target="_blank">source</a>
+      </span>
+    </footer>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
