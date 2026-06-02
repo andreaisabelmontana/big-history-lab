@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4338CA" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>big-history-lab · course outline — The Big History of Ideas &amp; Innovation</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <style>
+      /* course.html — scoped, reusing the *-lab :root tokens. No new palette. */
+      .lede { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.65; margin: 0 0 0.85rem; }
+      .lede + .lede { margin-top: 0; }
+
+      /* meta grid */
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0.6rem 1rem;
+        margin-top: 0.5rem;
+      }
+      .meta-grid .cell {
+        display: flex; flex-direction: column; gap: 0.15rem;
+        padding: 0.5rem 0.7rem;
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+        background: var(--bg);
+      }
+      .meta-grid .cell span { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em; }
+      .meta-grid .cell strong { color: var(--ink); font-weight: 700; font-size: 0.9rem; }
+
+      /* objective columns */
+      .obj-block { margin-top: 0.5rem; }
+      .obj-block h3 {
+        font-size: 0.82rem; font-weight: 700; color: var(--accent);
+        margin: 0.9rem 0 0.4rem; letter-spacing: -0.01em;
+      }
+      .obj-block ul { margin: 0; padding-left: 1.1rem; }
+      .obj-block li { color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 0.3rem; }
+      .frame-note {
+        margin-top: 0.7rem; padding: 0.5rem 0.75rem;
+        border-left: 3px solid var(--accent); background: var(--accent-soft);
+        border-radius: 0 6px 6px 0; font-size: 0.8rem; color: var(--ink-soft);
+      }
+
+      /* % bars */
+      .bars { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.5rem; }
+      .bar-row { display: grid; grid-template-columns: 220px 1fr 52px; align-items: center; gap: 0.6rem; }
+      .bar-row .lbl { font-size: 0.82rem; color: var(--ink-soft); font-weight: 500; }
+      .bar-track { height: 10px; border-radius: 999px; background: var(--rule); overflow: hidden; }
+      .bar-fill { height: 100%; background: var(--accent); border-radius: 999px; }
+      .bar-row .pct { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--accent); text-align: right; }
+      @media (max-width: 560px) { .bar-row { grid-template-columns: 1fr 60px; } .bar-row .bar-track { grid-column: 1 / -1; } }
+
+      .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+      @media (max-width: 760px) { .split { grid-template-columns: 1fr; } }
+      .split h3 { font-size: 0.85rem; font-weight: 700; margin: 0 0 0.5rem; color: var(--ink); }
+      .split h3::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); margin-right: 0.45em; transform: translateY(-1px); }
+
+      /* program / module blocks */
+      .module { margin-top: 1.25rem; }
+      .module:first-of-type { margin-top: 0.4rem; }
+      .module-head {
+        display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap;
+        padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule-h); margin-bottom: 0.25rem;
+      }
+      .module-head .mtag {
+        font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
+        color: #fff; background: var(--accent); padding: 0.12em 0.5em; border-radius: 999px;
+      }
+      .module-head h3 { font-size: 0.98rem; font-weight: 800; margin: 0; letter-spacing: -0.01em; color: var(--ink); }
+      .module-head .mrange { color: var(--muted); font-size: 0.78rem; font-family: var(--font-mono); }
+      .module-desc { color: var(--muted); font-size: 0.8rem; margin: 0.35rem 0 0.6rem; }
+
+      /* timeline of sessions */
+      .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+      .timeline::before {
+        content: ''; position: absolute; left: 15px; top: 8px; bottom: 8px;
+        width: 2px; background: var(--rule);
+      }
+      .sess { position: relative; padding: 0.55rem 0 0.55rem 2.5rem; }
+      .sess::before {
+        content: ''; position: absolute; left: 9px; top: 0.95rem;
+        width: 14px; height: 14px; border-radius: 999px;
+        background: var(--paper); border: 2px solid var(--accent);
+      }
+      .sess.milestone::before { background: var(--accent); }
+      .sess-num {
+        font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+        color: var(--muted); display: inline-block; margin-bottom: 0.1rem;
+      }
+      .sess-title { font-size: 0.92rem; font-weight: 700; color: var(--ink); margin: 0 0 0.2rem; letter-spacing: -0.01em; }
+      .sess-title .ms-flag {
+        font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600; vertical-align: middle;
+        color: var(--bad); border: 1px solid var(--bad); border-radius: 999px; padding: 0.05em 0.45em; margin-left: 0.4em;
+      }
+      .sess-obj { color: var(--ink-soft); font-size: 0.82rem; margin: 0 0 0.35rem; }
+      .sess ul.topics { margin: 0.2rem 0 0.4rem; padding-left: 1.05rem; }
+      .sess ul.topics li { color: var(--ink-soft); font-size: 0.81rem; margin-bottom: 0.18rem; }
+      .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.35rem; }
+      .tag {
+        font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500;
+        color: var(--ink-soft); background: var(--bg);
+        border: 1px solid var(--rule); border-radius: 999px; padding: 0.12em 0.55em;
+      }
+      .tag.read { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+      .xref {
+        font-size: 0.76rem; color: var(--muted); margin-top: 0.3rem;
+      }
+      .xref a { font-weight: 600; }
+
+      .biblio { margin: 0; padding-left: 1.1rem; }
+      .biblio li { color: var(--ink-soft); font-size: 0.84rem; margin-bottom: 0.4rem; }
+      .biblio li em { color: var(--ink); font-style: italic; }
+      .pill { font-family: var(--font-mono); font-size: 0.66rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 0.05em 0.45em; margin-left: 0.3em; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="title">
+        <span class="dot"></span><strong>big-history-lab</strong>
+        <span class="sub">course outline · The Big History of Ideas &amp; Innovation</span>
+      </div>
+      <nav>
+        <a href="./index.html">← interactive demos</a>
+        <a href="#overview">overview</a>
+        <a href="#objectives">objectives</a>
+        <a href="#assessment">methodology</a>
+        <a href="#program">program</a>
+        <a href="#biblio">bibliography</a>
+        <a href="./SYLLABUS.pdf" target="_blank">syllabus PDF</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- OVERVIEW + META -->
+      <section class="demo" id="overview">
+        <h2>The Big History of Ideas and Innovation</h2>
+        <p class="cap">A syllabus-driven outline of the BCSAI first-year humanities course — from Stone-Age tools and
+          hydraulic civilizations to ChatGPT, transhumanism and the ethics of super-intelligence. This page mirrors the
+          official program; the <a href="./index.html">interactive demos</a> visualize its core themes (thresholds,
+          S-curves, accelerating returns, the idea map).</p>
+
+        <p class="lede">The course explores how science and technology have changed the lives of all human beings and
+          augmented our abilities. It begins with the earliest epochs of human society and the "scientific revolution"
+          that let nations conquer and divide the world — from gunpowder to manned flight to the first steps on the moon.
+          Since the integrated circuit and the silicon chip, the rate of change has accelerated in unprecedented ways:
+          the Internet, search, big data, social media and machine learning have made us more capable, while medical and
+          cybernetic advances point toward longer — even a-mortal — lives.</p>
+        <p class="lede">It concludes by examining how artificial intelligence is set to dominate the coming decade, the
+          prospect of a super-intelligence as "the ultimate invention," and the ethics of a future of human cyborgs and
+          super-human races — reading Marshall McLuhan, Jean Baudrillard, Ray Kurzweil, Max Tegmark, Erik Davis, John Gray
+          and Ulrich Beck. Every development is analyzed through a humanities, gendered, and sustainability framework.</p>
+
+        <div class="meta-grid">
+          <div class="cell"><span>Program</span><strong>BCSAI — Computer Science &amp; AI</strong></div>
+          <div class="cell"><span>Subject code</span><strong>HIO-N-CSAI.1.M.A</strong></div>
+          <div class="cell"><span>Area</span><strong>Humanities</strong></div>
+          <div class="cell"><span>Sessions</span><strong>30 (live, in-person)</strong></div>
+          <div class="cell"><span>Credits</span><strong>6.0 ECTS</strong></div>
+          <div class="cell"><span>Academic year</span><strong>2025–26</strong></div>
+          <div class="cell"><span>Degree course</span><strong>First</strong></div>
+          <div class="cell"><span>Semester</span><strong>1º</strong></div>
+          <div class="cell"><span>Category</span><strong>Compulsory</strong></div>
+          <div class="cell"><span>Language</span><strong>English</strong></div>
+          <div class="cell"><span>Professor</span><strong>Dr. Ibrahim Al-Marashi</strong></div>
+          <div class="cell"><span>Contact</span><strong>ial-marashi@faculty.ie.edu</strong></div>
+        </div>
+        <p class="xref" style="margin-top:0.8rem;">Professor: Dr. Ibrahim Al-Marashi (D.Phil., Oxford) — Associate
+          Professor of Middle East History, CSU San Marcos; co-author of <em>A Concise History of the Middle East</em>
+          (2024). Office hours upon request.</p>
+      </section>
+
+      <!-- LEARNING OBJECTIVES -->
+      <section class="demo" id="objectives">
+        <h2>Learning objectives</h2>
+        <p class="cap">Objectives are organized around the course's three parts: the deep-historical background, the
+          modern era, and the digital future.</p>
+
+        <div class="obj-block">
+          <h3>Part 1 · Background</h3>
+          <ul>
+            <li>Understand how technology has played a role in the evolution of humans.</li>
+            <li>Discover the major achievements through history driven by technological change.</li>
+            <li>See how early technologies gave way to more advanced computational systems.</li>
+            <li>Develop knowledge of how hardware evolved from vacuum tubes to silicon chips.</li>
+          </ul>
+        </div>
+        <div class="obj-block">
+          <h3>Part 2 · The modern era</h3>
+          <ul>
+            <li>Understand the key technologies of the second half of the 20th century and their role in augmenting our abilities.</li>
+            <li>See how businesses were revolutionized by databases and digital transformation.</li>
+            <li>Understand how communication technologies let us reach anybody, at any time.</li>
+            <li>Understand the use of data to drive ground-breaking scientific discoveries.</li>
+            <li>See the impact of the Internet and the Cloud — a "second brain" and powerful distributed computing.</li>
+            <li>Develop a deep understanding of big data and how social media transformed how we communicate.</li>
+          </ul>
+        </div>
+        <div class="obj-block">
+          <h3>Part 3 · The Digital Future</h3>
+          <ul>
+            <li>Look forward to the possibilities of the artificial-intelligence revolution.</li>
+            <li>Learn how AI will transform our lives and could be "the final invention."</li>
+            <li>Discover how health technologies may cure diseases — and the possibility of a-mortal humans.</li>
+            <li>Learn about cybernetics and biotechnology accelerating the rate of evolution.</li>
+            <li>Discuss the ethical and moral possibilities of this age of exponential improvement.</li>
+          </ul>
+        </div>
+        <p class="frame-note"><strong>Cross-cutting lens.</strong> In every part, all developments are analyzed through a
+          humanities, gendered, and sustainability framework (Environment · Governance · Social Challenge · Economic Development).</p>
+      </section>
+
+      <!-- METHODOLOGY + ASSESSMENT -->
+      <section class="demo" id="assessment">
+        <h2>Teaching methodology &amp; assessment</h2>
+        <p class="cap">IE's method is collaborative, active and applied. Classes mix teaching, debate, readings and the
+          examination of artifacts, using multimedia — archive footage and modern interviews. Critical use of GenAI is
+          encouraged, provided it is acknowledged.</p>
+
+        <div class="split">
+          <div>
+            <h3>Learning activities (effort weighting)</h3>
+            <div class="bars">
+              <div class="bar-row"><span class="lbl">Lectures</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="pct">30%</span></div>
+              <div class="bar-row"><span class="lbl">Discussions</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="pct">10%</span></div>
+              <div class="bar-row"><span class="lbl">Exercises · async · field work</span><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><span class="pct">50%</span></div>
+              <div class="bar-row"><span class="lbl">Individual studying</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="pct">10%</span></div>
+            </div>
+            <p class="xref" style="margin-top:0.6rem;">Total: 150.0 hours of student effort (45 + 15 + 75 + 15).</p>
+          </div>
+          <div>
+            <h3>Evaluation criteria (grade weighting)</h3>
+            <div class="bars">
+              <div class="bar-row"><span class="lbl">Class participation (pen-and-paper journal)</span><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><span class="pct">25%</span></div>
+              <div class="bar-row"><span class="lbl">Midterm exam</span><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><span class="pct">25%</span></div>
+              <div class="bar-row"><span class="lbl">Block work (1000-word op-ed + recorded talk)</span><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><span class="pct">25%</span></div>
+              <div class="bar-row"><span class="lbl">Final exam</span><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><span class="pct">25%</span></div>
+            </div>
+            <p class="xref" style="margin-top:0.6rem;">Minimum final-exam grade 3.5; below this sends the student to the
+              re-sit regardless of overall grade. 80% attendance required.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROGRAM -->
+      <section class="demo" id="program">
+        <h2>Program — 30 sessions across three parts</h2>
+        <p class="cap">The full program, grouped by part and module. Reading tags mark key texts; the compulsory
+          backbone is Daniel Headrick's <em>Technology: A World History</em> (its chapters thread through the deep-history
+          sessions). Cross-references link sessions to the matching <a href="./index.html">interactive demos</a>.</p>
+
+        <!-- PART 1 -->
+        <div class="module">
+          <div class="module-head">
+            <span class="mtag">Part 1</span>
+            <h3>Background — deep history to the early modern</h3>
+            <span class="mrange">Sessions 1–12</span>
+          </div>
+          <p class="module-desc">From the earliest epochs and hydraulic civilizations through the Axial Age, Islamic
+            innovation, the Renaissance and the threshold of modernity — technology as a human extension.</p>
+          <ol class="timeline">
+
+            <li class="sess milestone">
+              <span class="sess-num">SESSION 1</span>
+              <p class="sess-title">Introduction</p>
+              <p class="sess-obj">Course framing and the sustainability lens (Environment · Governance · Social Challenge).</p>
+              <ul class="topics">
+                <li>Course overview, expectations and the humanities/gendered/sustainability framework</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 2</span>
+              <p class="sess-title">Class Overview — modernity &amp; risk</p>
+              <p class="sess-obj">How innovation reshapes everyday life and produces new risks.</p>
+              <ul class="topics">
+                <li>"Dumb Ways to Die"; the washing machine to Ulrich Beck's <em>Risk Society</em></li>
+                <li>"The History of the World, I Guess"; the modernity meme</li>
+              </ul>
+              <div class="tags"><span class="tag">Ulrich Beck</span><span class="tag read">Beck · Risk Society</span></div>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 3</span>
+              <p class="sess-title">From Sumer, Iraq to Phoenicia: Time, Agriculture &amp; Writing</p>
+              <p class="sess-obj">The first information technologies and the rise of hydraulic civilizations.</p>
+              <ul class="topics">
+                <li>McLuhan: writing as a human extension; Gilgamesh and sustainability; gender</li>
+                <li>Sumer (disease), "This Land is Mine"; Phoenicians — from the alphabet to Alphabet (Google); Ancient Egypt</li>
+                <li>Headrick 1 — Stone Age Technology; 2 — Hydraulic Civilizations (4000–1500 BCE)</li>
+              </ul>
+              <div class="tags"><span class="tag read">Gilgamesh</span><span class="tag read">McLuhan · The Medium is the Message</span><span class="tag read">Headrick ch.1–2</span></div>
+              <p class="xref">See demo: <a href="./index.html#ideas">idea map (writing → alphabet)</a> · <a href="./index.html#thresholds">threshold 7 — agriculture</a></p>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 4</span>
+              <p class="sess-title">The Axial Age I</p>
+              <p class="sess-obj">Mobility technologies and the birth of philosophy and narrative.</p>
+              <ul class="topics">
+                <li>Indo-European chariots and cannabis; Ancient Greece</li>
+                <li>Plato's Allegory of the Cave; Medusa; Aristotle's tragedy, the Hero's Journey, story as the greatest invention</li>
+              </ul>
+              <div class="tags"><span class="tag">Plato</span><span class="tag">Aristotle</span></div>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 5</span>
+              <p class="sess-title">The Axial Age II</p>
+              <p class="sess-obj">Religious and philosophical systems as social technologies of empire.</p>
+              <ul class="topics">
+                <li>Oracle of Delphi; Zoroastrianism and Manichaeism; the Tao</li>
+                <li>Headrick 3 — Iron, Horses, and Empires (1500 BCE – 500 CE)</li>
+              </ul>
+              <div class="tags"><span class="tag read">Headrick ch.3</span></div>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 6</span>
+              <p class="sess-title">Islamic Innovation</p>
+              <p class="sess-obj">Post-classical and medieval revolutions in science and craft.</p>
+              <ul class="topics">
+                <li>From the pointed arch to the "Arabic" numerals; the genie and entheogenie</li>
+                <li>Magic, alchemy, and the occult</li>
+                <li>Headrick 4 — Post-Classical and Medieval Revolutions (500–1400)</li>
+              </ul>
+              <div class="tags"><span class="tag read">Headrick ch.4</span></div>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 7</span>
+              <p class="sess-title">The Renaissance(s)</p>
+              <p class="sess-obj">The rebirth of invention and the engineer-artist.</p>
+              <ul class="topics">
+                <li>Brunelleschi; Machiavelli; Da Vinci</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 8</span>
+              <p class="sess-title">What It Means to Be Modern</p>
+              <p class="sess-obj">Defining modernity through its critics; adds the Economic Development lens.</p>
+              <ul class="topics">
+                <li>Max Weber, John Gray, and what it means to be modern</li>
+              </ul>
+              <div class="tags"><span class="tag">Max Weber</span><span class="tag">John Gray</span></div>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 9</span>
+              <p class="sess-title">Mass Conquest: Gunpowder &amp; Colonial Power</p>
+              <p class="sess-obj">How military and biological technologies enabled global conquest and extraction.</p>
+              <ul class="topics">
+                <li>The modernity meme and the age of -isms; Vladan Joler, <em>Calculating Empires: A Genealogy of Technology and Power Since 1500</em></li>
+                <li>Columbian Exchange / extraction</li>
+                <li>Headrick 5 — An Age of Global Interactions (1300–1800)</li>
+              </ul>
+              <div class="tags"><span class="tag">Vladan Joler</span><span class="tag read">Headrick ch.5</span></div>
+              <p class="xref">See demo: <a href="./index.html#ideas">idea map — in the spirit of Joler's <em>Calculating Empires</em></a></p>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 10</span>
+              <p class="sess-title">The "Enlightened" Innovators I</p>
+              <p class="sess-obj">Instruments, taxonomy and the financial machinery of the Enlightenment.</p>
+              <ul class="topics">
+                <li>Telescope to the flying telescope; Giordano Bruno</li>
+                <li>Linnaeus and race; futures trading; caffeine</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 11</span>
+              <p class="sess-title">The "Enlightened" Innovators II</p>
+              <p class="sess-obj">Continuation — the Enlightenment's instruments of knowledge and power.</p>
+              <ul class="topics">
+                <li>Further Enlightenment science, classification, and commerce</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 12</span>
+              <p class="sess-title">Industrialism — "Industrial Revolution," Environmentalism &amp; Sustainability</p>
+              <p class="sess-obj">Industrial power and its cultural and political reactions; adds Economic Development.</p>
+              <ul class="topics">
+                <li><em>Frankenstein</em>; anarchism; romanticism</li>
+              </ul>
+              <div class="tags"><span class="tag read">Shelley · Frankenstein</span></div>
+              <p class="xref">See demo: <a href="./index.html#revolutions">revolutions timeline</a> · <a href="./index.html#pop">population growth (industrial jump)</a></p>
+            </li>
+          </ol>
+        </div>
+
+        <!-- PART 2 -->
+        <div class="module">
+          <div class="module-head">
+            <span class="mtag">Part 2</span>
+            <h3>The modern era — industry, world wars &amp; the atomic/space age</h3>
+            <span class="mrange">Sessions 13–24</span>
+          </div>
+          <p class="module-desc">Nationalism, Darwinism, the acceleration of change, two world wars, and the atomic,
+            space and cybernetic age that seeded the digital revolution.</p>
+          <ol class="timeline">
+
+            <li class="sess">
+              <span class="sess-num">SESSION 13</span>
+              <p class="sess-title">The Nation as Innovation</p>
+              <p class="sess-obj">The nation-state and mass media as a coupled invention.</p>
+              <ul class="topics">
+                <li>The newspaper; Ernst Renan vs. von Herder; the Grimm Brothers and the good-guy/bad-guy myth; Judah Friedlander on nations</li>
+                <li>Headrick 6 — The First Industrial Revolution (1750–1869)</li>
+              </ul>
+              <div class="tags"><span class="tag read">Headrick ch.6</span></div>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 14</span>
+              <p class="sess-title">Darwinism</p>
+              <p class="sess-obj">Evolution as science and as ideology of race and imperialism.</p>
+              <ul class="topics">
+                <li><em>The Origin of Species</em> (1859); Trevor Noah on race and imperialism; the history of Japan and the Last Samurai</li>
+                <li>Headrick 7 — The Acceleration of Change (1869–1939)</li>
+              </ul>
+              <div class="tags"><span class="tag">Darwin (1859)</span><span class="tag read">Headrick ch.7</span></div>
+              <p class="xref">See demo: <a href="./index.html#accel">accelerating returns</a></p>
+            </li>
+
+            <li class="sess milestone">
+              <span class="sess-num">SESSION 15</span>
+              <p class="sess-title">Midterm Exam <span class="ms-flag">EXAM</span></p>
+              <p class="sess-obj">Written, in-class exam covering Part 1 and early Part 2 (25% of grade).</p>
+              <ul class="topics">
+                <li>Format discussed in class; tests understanding of topics and slides</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 16</span>
+              <p class="sess-title">Innovation on the Eve of the 20th Century I</p>
+              <p class="sess-obj">The chemical, medical and material revolutions of the late 19th century.</p>
+              <ul class="topics">
+                <li>The tabloid newspaper; distillation and cocaine; Freud, dreams, Jung &amp; Nietzsche</li>
+                <li>Germ theory and vaccines; Arts and Crafts movement; oil; steel</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 17</span>
+              <p class="sess-title">Innovation on the Eve of the 20th Century II</p>
+              <p class="sess-obj">Continuation — the technologies that set the stage for total war.</p>
+              <ul class="topics">
+                <li>Further late-19th/early-20th-century industrial and cultural innovation</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 18</span>
+              <p class="sess-title">World War One I</p>
+              <p class="sess-obj">Industrialized warfare and its signature technologies.</p>
+              <ul class="topics">
+                <li>Chemical weapons; the tank</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 19</span>
+              <p class="sess-title">World War One II</p>
+              <p class="sess-obj">Continuation — the aftermath and total mobilization of technology.</p>
+              <ul class="topics">
+                <li>Further WWI technologies and their social consequences</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 20</span>
+              <p class="sess-title">Inter-War Period</p>
+              <p class="sess-obj">Machines, manifestos and the birth of modern branding.</p>
+              <ul class="topics">
+                <li>The robot; the Futurist Manifesto; advertising, brands and logos</li>
+                <li>Headrick 8 — Toward a Post-Industrial World (1939–2000)</li>
+              </ul>
+              <div class="tags"><span class="tag read">Harari · Homo Deus, ch.11 (pp. 533–541, 558–565)</span><span class="tag read">Headrick ch.8</span></div>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 21</span>
+              <p class="sess-title">World War Two</p>
+              <p class="sess-obj">The war that built the computer, the rocket and the bomb.</p>
+              <ul class="topics">
+                <li>Airpower; the rocket; Turing; the atom bomb; "Deaths from World War Two"</li>
+              </ul>
+              <div class="tags"><span class="tag">Turing</span></div>
+              <p class="xref">See demo: <a href="./index.html#ideas">idea map (computing lineage)</a></p>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 22</span>
+              <p class="sess-title">The Atomic &amp; Space Age and the Anthropocene I</p>
+              <p class="sess-obj">Post-war technoculture, cybernetics and the dawn of cyberspace.</p>
+              <ul class="topics">
+                <li>Nuclear weapons; DARPA; Dalí and drugs; space, deGrasse Tyson and the satellite; fast food</li>
+                <li>Huxley vs. Orwell (<em>Doors of Perception</em>); The Doors vs. Hendrix; cybernetics and the cybernetic organism</li>
+                <li>Cyberpunk and William Gibson — cyberspace, "consensual hallucination"; MTV; Weird Science / War Games; the Unabomber</li>
+              </ul>
+              <div class="tags"><span class="tag read">Huxley · Doors of Perception</span><span class="tag">Gibson · cyberspace</span></div>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 23</span>
+              <p class="sess-title">The Atomic &amp; Space Age and the Anthropocene II</p>
+              <p class="sess-obj">Continuation — the cultural fallout of the atomic and cybernetic age.</p>
+              <ul class="topics">
+                <li>Further atomic/space-age technologies and the Anthropocene</li>
+              </ul>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 24</span>
+              <p class="sess-title">Globalism</p>
+              <p class="sess-obj">Globalization and its discontents at the close of the 20th century.</p>
+              <ul class="topics">
+                <li>Barber's <em>Jihad vs. McWorld</em></li>
+              </ul>
+              <div class="tags"><span class="tag read">Barber · Jihad vs McWorld</span></div>
+            </li>
+          </ol>
+        </div>
+
+        <!-- PART 3 -->
+        <div class="module">
+          <div class="module-head">
+            <span class="mtag">Part 3</span>
+            <h3>The Digital Future — digitalism, AI &amp; transhumanism</h3>
+            <span class="mrange">Sessions 25–30</span>
+          </div>
+          <p class="module-desc">The Fourth Industrial Revolution, hyperreality, the AI cyborg and transhumanism — and
+            the ethics of where the innovation is leading.</p>
+          <ol class="timeline">
+
+            <li class="sess">
+              <span class="sess-num">SESSION 25</span>
+              <p class="sess-title">Digitalism I</p>
+              <p class="sess-obj">The Fourth Industrial Revolution and the politics of platforms.</p>
+              <ul class="topics">
+                <li>The Fourth Industrial Revolution; "These Systems are Failing Me"; hyperreality (Baudrillard); Ursula Le Guin; the meme</li>
+                <li>"The Future Doesn't Need Us"; the drone; Facebook and its foreign policy; Harari, Google and ISIS</li>
+              </ul>
+              <div class="tags"><span class="tag">Baudrillard · hyperreality</span><span class="tag read">Harari · Nexus</span></div>
+              <p class="xref">See demo: <a href="./index.html#scurve">diffusion S-curves</a> · <a href="./index.html#learning">collective learning</a></p>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 26</span>
+              <p class="sess-title">Digitalism II</p>
+              <p class="sess-obj">Continuation — the social and cognitive impact of the digital age.</p>
+              <ul class="topics">
+                <li>Further digital-era platforms, networks and their effects</li>
+              </ul>
+              <div class="tags"><span class="tag read">Carr · The Shallows</span></div>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 27</span>
+              <p class="sess-title">InnovAItion I</p>
+              <p class="sess-obj">AI, the cyborg and the merger of the technological with the spiritual.</p>
+              <ul class="topics">
+                <li>The AI cyborg; the divine digital, "fAIth"; transhumanism</li>
+              </ul>
+              <div class="tags"><span class="tag read">Davis · Techgnosis</span><span class="tag read">Tegmark · Life 3.0</span><span class="tag read">Kurzweil</span></div>
+              <p class="xref">See demo: <a href="./index.html#accel">accelerating returns</a> · <a href="./index.html#ideas">idea map → AI</a></p>
+            </li>
+
+            <li class="sess">
+              <span class="sess-num">SESSION 28</span>
+              <p class="sess-title">InnovAItion II</p>
+              <p class="sess-obj">AI's role in society, education and the mind.</p>
+              <ul class="topics">
+                <li>The role of education in the age of AI vs. AI's role in education; AI and dreams; John Oliver video</li>
+              </ul>
+            </li>
+
+            <li class="sess milestone">
+              <span class="sess-num">SESSION 29</span>
+              <p class="sess-title">Final Exam <span class="ms-flag">EXAM</span></p>
+              <p class="sess-obj">Comprehensive written, in-class exam covering all aspects of the course (25%; min. 3.5).</p>
+              <ul class="topics">
+                <li>Format discussed in class; includes all aspects of the course</li>
+              </ul>
+            </li>
+
+            <li class="sess milestone">
+              <span class="sess-num">SESSION 30</span>
+              <p class="sess-title">Conclusion: Earthrise &amp; The Pale Blue Dot</p>
+              <p class="sess-obj">A closing reflection on planetary perspective and the ethics of the coming age.</p>
+              <ul class="topics">
+                <li>Earthrise and the Pale Blue Dot; where innovation and disruption are leading</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- BIBLIOGRAPHY -->
+      <section class="demo" id="biblio">
+        <h2>Bibliography &amp; key readings</h2>
+        <p class="cap">One textbook anchors the course; all other readings are provided digitally. Recommended and
+          additional works extend the themes from Sapiens to super-intelligence.</p>
+
+        <div class="split">
+          <div>
+            <h3>Compulsory</h3>
+            <ul class="biblio">
+              <li>Daniel R. Headrick — <em>Technology: A World History</em>, 1st ed., Oxford. ISBN 0195338219 <span class="pill">textbook</span></li>
+            </ul>
+            <h3 style="margin-top:1rem;">Recommended</h3>
+            <ul class="biblio">
+              <li>Yuval N. Harari — <em>Sapiens: A Brief History of Humankind</em>. ISBN 9780062316110</li>
+              <li>Yuval N. Harari — <em>Homo Deus: A Brief History of Tomorrow</em>. ISBN 1910701882</li>
+              <li>Max Tegmark — <em>Life 3.0: Being Human in the Age of Artificial Intelligence</em>. ISBN 1101946598</li>
+              <li>Walter Isaacson — <em>The Innovators</em> (2015), Simon &amp; Schuster. ISBN 9781471138805</li>
+              <li>Andrew F. Krepinevich — <em>The Origins of Victory</em>. ISBN 9780300280098</li>
+              <li>McClellan &amp; Dorn — <em>Science and Technology in World History</em>, 3rd ed. ISBN 9781421417752</li>
+              <li>Dodgson &amp; Gann — <em>Innovation</em>, 2nd ed., Oxford. ISBN 0198825048</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Digital excerpts &amp; theorists</h3>
+            <ul class="biblio">
+              <li><em>Gilgamesh</em></li>
+              <li>Aldous Huxley — <em>The Doors of Perception</em></li>
+              <li>Marshall McLuhan — <em>The Medium is the Message</em></li>
+              <li>David Foster Wallace — <em>This is Water</em></li>
+              <li>Nicholas Carr — <em>The Shallows</em></li>
+              <li>Erik Davis — <em>Techgnosis</em></li>
+              <li>Ulrich Grober — <em>A Cultural History of Sustainability</em></li>
+              <li>Michael Pollan — <em>How to Change Your Mind</em></li>
+              <li>Yuval N. Harari — <em>Nexus</em></li>
+            </ul>
+            <p class="frame-note" style="margin-top:0.8rem;">Featured theorists across the course: McLuhan, Baudrillard,
+              Kurzweil, Tegmark, Erik Davis, John Gray and Ulrich Beck — from ChatGPT and SpaceX to transhumanism.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>big-history-lab — Andrea Montana · IE BCSAI</span>
+      <span class="more">
+        <a href="./index.html">interactive demos</a>
+        <a href="./SYLLABUS.pdf" target="_blank">syllabus PDF</a>
+        <a href="https://github.com/andreaisabelmontana/big-history-lab" target="_blank">source</a>
+      </span>
+    </footer>
+  </body>
+</html>
