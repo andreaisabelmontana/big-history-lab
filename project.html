@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4338CA" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>big-history-lab · worked example project — tracing the printing press across the thresholds</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <style>
+      /* project.html — scoped, reusing the *-lab :root tokens. No new palette. */
+      .lede { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.65; margin: 0 0 0.85rem; }
+      .lede + .lede { margin-top: 0; }
+      .demo p, .demo li { line-height: 1.6; }
+
+      /* meta grid (mirrors course.html) */
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0.6rem 1rem;
+        margin-top: 0.5rem;
+      }
+      .meta-grid .cell {
+        display: flex; flex-direction: column; gap: 0.15rem;
+        padding: 0.5rem 0.7rem;
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+        background: var(--bg);
+      }
+      .meta-grid .cell span { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em; }
+      .meta-grid .cell strong { color: var(--ink); font-weight: 700; font-size: 0.9rem; }
+
+      .frame-note {
+        margin-top: 0.7rem; padding: 0.5rem 0.75rem;
+        border-left: 3px solid var(--accent); background: var(--accent-soft);
+        border-radius: 0 6px 6px 0; font-size: 0.8rem; color: var(--ink-soft);
+      }
+      .frame-note strong { color: var(--accent); }
+
+      .thesis {
+        margin: 0.6rem 0; padding: 0.8rem 1rem;
+        border: 1px solid var(--rule-h); border-left: 4px solid var(--accent);
+        border-radius: 0 8px 8px 0; background: var(--bg);
+        font-size: 0.95rem; line-height: 1.6; color: var(--ink);
+      }
+      .thesis .tlabel {
+        display: block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 0.3rem;
+      }
+      .thesis em { color: var(--ink); font-style: italic; }
+
+      /* split columns */
+      .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+      @media (max-width: 760px) { .split { grid-template-columns: 1fr; } }
+      .split h3 { font-size: 0.85rem; font-weight: 700; margin: 0 0 0.5rem; color: var(--ink); }
+      .split h3::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); margin-right: 0.45em; transform: translateY(-1px); }
+
+      /* objective-style lists */
+      .obj-block { margin-top: 0.5rem; }
+      .obj-block h3 {
+        font-size: 0.82rem; font-weight: 700; color: var(--accent);
+        margin: 0.9rem 0 0.4rem; letter-spacing: -0.01em;
+      }
+      .obj-block ul, .obj-block ol { margin: 0; padding-left: 1.1rem; }
+      .obj-block li { color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 0.3rem; }
+      .obj-block li b { color: var(--ink); }
+
+      /* era stepper (mirrors course.html timeline) */
+      .era { position: relative; padding: 0.7rem 0 0.9rem 2.5rem; }
+      .eras { list-style: none; margin: 0.4rem 0 0; padding: 0; position: relative; }
+      .eras::before {
+        content: ''; position: absolute; left: 15px; top: 10px; bottom: 10px;
+        width: 2px; background: var(--rule);
+      }
+      .era::before {
+        content: ''; position: absolute; left: 9px; top: 1.05rem;
+        width: 14px; height: 14px; border-radius: 999px;
+        background: var(--accent); border: 2px solid var(--paper);
+        box-shadow: 0 0 0 1px var(--accent);
+      }
+      .era-num { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; color: var(--muted); display: inline-block; margin-bottom: 0.1rem; }
+      .era-title { font-size: 0.95rem; font-weight: 800; color: var(--ink); margin: 0 0 0.25rem; letter-spacing: -0.01em; }
+      .era-claim { color: var(--ink); font-size: 0.86rem; margin: 0 0 0.45rem; font-weight: 600; }
+      .era p { color: var(--ink-soft); font-size: 0.85rem; margin: 0 0 0.45rem; }
+      .era .evidence {
+        margin: 0.4rem 0; padding: 0.45rem 0.7rem;
+        border-left: 3px solid var(--rule-h); background: var(--bg);
+        border-radius: 0 6px 6px 0; font-size: 0.81rem; color: var(--ink-soft);
+      }
+      .era .evidence b { color: var(--ink); }
+      .era .so-what {
+        font-size: 0.81rem; color: var(--ink-soft);
+        padding: 0.35rem 0.7rem; border-left: 3px solid var(--accent);
+        background: var(--accent-soft); border-radius: 0 6px 6px 0; margin-top: 0.4rem;
+      }
+      .era .so-what b { color: var(--accent); }
+
+      .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
+      .tag {
+        font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500;
+        color: var(--ink-soft); background: var(--bg);
+        border: 1px solid var(--rule); border-radius: 999px; padding: 0.12em 0.55em;
+      }
+      .tag.read { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+      .xref { font-size: 0.76rem; color: var(--muted); margin-top: 0.35rem; }
+      .xref a { font-weight: 600; }
+
+      /* generic tables (sources, rubric, mapping) */
+      .tbl-wrap { overflow-x: auto; margin-top: 0.5rem; border: 1px solid var(--rule); border-radius: 8px; }
+      table.grid { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+      table.grid th, table.grid td { text-align: left; padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+      table.grid thead th {
+        background: var(--bg); color: var(--muted); font-size: 0.7rem; text-transform: uppercase;
+        letter-spacing: 0.03em; font-weight: 700; border-bottom: 1px solid var(--rule-h);
+      }
+      table.grid tbody tr:last-child td { border-bottom: 0; }
+      table.grid td b { color: var(--ink); }
+      table.grid td em { color: var(--ink); font-style: italic; }
+      table.grid .src { font-weight: 600; color: var(--ink); }
+      table.grid .where { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); white-space: nowrap; }
+      table.grid .wt { font-family: var(--font-mono); font-weight: 600; color: var(--accent); text-align: right; white-space: nowrap; }
+      table.grid tfoot td, table.grid tr.total td { font-weight: 700; color: var(--ink); border-top: 1px solid var(--rule-h); background: var(--bg); }
+
+      .lens-key { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.3rem 0 0.2rem; }
+      .lens {
+        font-family: var(--font-mono); font-size: 0.66rem; font-weight: 600;
+        color: #fff; background: var(--accent); border-radius: 999px; padding: 0.1em 0.5em;
+      }
+      .lens.env  { background: var(--good); }
+      .lens.gov  { background: var(--accent); }
+      .lens.soc  { background: var(--warn); color: var(--ink); }
+      .lens.econ { background: var(--bad); }
+
+      .pill { font-family: var(--font-mono); font-size: 0.66rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 0.05em 0.45em; margin-left: 0.3em; }
+
+      .callout {
+        margin: 0.5rem 0; padding: 0.6rem 0.85rem;
+        border: 1px solid var(--rule); border-radius: 8px; background: var(--bg);
+        font-size: 0.84rem; color: var(--ink-soft); line-height: 1.6;
+      }
+      .callout h4 { margin: 0 0 0.3rem; font-size: 0.78rem; font-weight: 700; color: var(--ink); }
+      .callout h4::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); margin-right: 0.45em; transform: translateY(-1px); }
+
+      .biblio { margin: 0; padding-left: 1.1rem; }
+      .biblio li { color: var(--ink-soft); font-size: 0.83rem; margin-bottom: 0.45rem; line-height: 1.5; }
+      .biblio li em { color: var(--ink); font-style: italic; }
+      .biblio li .anno { display: block; color: var(--muted); font-size: 0.77rem; margin-top: 0.1rem; }
+      .biblio li .where { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); }
+
+      .stepnav { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+      .stepnav a {
+        font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+        color: var(--ink-soft); background: var(--bg);
+        border: 1px solid var(--rule); border-radius: 999px; padding: 0.2em 0.7em;
+        border-bottom: 1px solid var(--rule);
+      }
+      .stepnav a:hover { color: var(--accent); border-color: var(--accent); }
+
+      .alt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.7rem; margin-top: 0.5rem; }
+      .alt-card { padding: 0.65rem 0.8rem; border: 1px solid var(--rule); border-radius: 8px; background: var(--bg); }
+      .alt-card h4 { margin: 0 0 0.25rem; font-size: 0.85rem; font-weight: 700; color: var(--ink); }
+      .alt-card p { margin: 0; font-size: 0.79rem; color: var(--ink-soft); line-height: 1.55; }
+      .alt-card .span { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent); display: block; margin-top: 0.3rem; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="title">
+        <span class="dot"></span><strong>big-history-lab</strong>
+        <span class="sub">worked example project · tracing one innovation across the thresholds</span>
+      </div>
+      <nav>
+        <a href="./index.html">← interactive demos</a>
+        <a href="./course.html">course outline</a>
+        <a href="#overview">overview</a>
+        <a href="#brief">brief &amp; thesis</a>
+        <a href="#argument">era-by-era</a>
+        <a href="#sources">sources</a>
+        <a href="#synthesis">counter-arguments</a>
+        <a href="#rubric">outcomes &amp; rubric</a>
+        <a href="#extensions">extensions</a>
+        <a href="#references">references</a>
+        <a href="./SYLLABUS.pdf" target="_blank">syllabus PDF</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 1. OVERVIEW -->
+      <section class="demo" id="overview">
+        <h2>Worked example project — tracing the printing press across the thresholds</h2>
+        <p class="cap">A complete, graded-quality model of the kind of research essay this course asks for. It follows a
+          <em>single</em> innovation — Gutenberg's movable-type printing press (c. 1450) — across the eras of the
+          <a href="./course.html#program">program</a>, building one cumulative argument about technology and power. Use it as a
+          template: the structure, the evidence discipline, the counter-argument, and the rubric all transfer to whatever
+          innovation you choose for your own <a href="./course.html#assessment">block work</a>.</p>
+
+        <p class="lede">This page is not a finished essay you should copy — it is the <b>scaffolding behind</b> a strong essay,
+          made visible. Each era below shows the <b>claim</b> you would make, the <b>named evidence</b> that grounds it, and the
+          <b>"so what"</b> that ties it back to the thesis. The aim is to show how a humanities argument is built: not by listing
+          facts, but by making a contestable claim and defending it through the course's analytical lens.</p>
+
+        <div class="meta-grid">
+          <div class="cell"><span>Project type</span><strong>Analytical research essay (no code)</strong></div>
+          <div class="cell"><span>Innovation traced</span><strong>The printing press (c. 1450)</strong></div>
+          <div class="cell"><span>Format</span><strong>~3,000-word essay + sources</strong></div>
+          <div class="cell"><span>Maps to assessment</span><strong>Block work · 25%</strong></div>
+          <div class="cell"><span>Sessions exercised</span><strong>S3, S6, S9, S13, S21, S25–26</strong></div>
+          <div class="cell"><span>Analytical lens</span><strong>Environment · Governance · Social · Economic</strong></div>
+          <div class="cell"><span>Theory frame</span><strong>McLuhan · Winner · Benjamin</strong></div>
+          <div class="cell"><span>Deliverable</span><strong>Thesis-driven essay + annotated bibliography</strong></div>
+        </div>
+
+        <div class="obj-block">
+          <h3>Goal</h3>
+          <ul>
+            <li><b>Demonstrate the course's central move</b> — that a technology "is not just a tool but a <em>human extension</em> that reorganizes society, power and the self" (<a href="./course.html#program">Part 1 outcomes</a>).</li>
+            <li><b>Practise cumulative argument</b> — carry one thesis through six eras instead of writing six disconnected mini-essays.</li>
+            <li><b>Use named evidence</b> — every claim is anchored to a thinker, work, or concept the course actually teaches (no vague "studies show").</li>
+            <li><b>Take and survive a counter-argument</b> — the synthesis section answers the strongest objection rather than ignoring it.</li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <h4>How this maps to the real assignment</h4>
+          The graded <a href="./course.html#assessment">block work</a> is a <b>1,000-word op-ed plus a 10-minute recorded talk</b>.
+          This worked example is deliberately longer (~3,000 words) so you can see the full machinery; to convert it into the
+          op-ed, you would keep the thesis and two or three of the strongest eras, lead with the present-day stakes (Session 25–26),
+          and cut the apparatus. The discipline of evidence and counter-argument shown here is exactly what earns marks under
+          "argument, use of course concepts, and depth."
+        </div>
+
+        <div class="stepnav">
+          <a href="#brief">1 · brief &amp; thesis</a>
+          <a href="#argument">2 · era-by-era</a>
+          <a href="#sources">3 · sources &amp; method</a>
+          <a href="#synthesis">4 · counter-arguments</a>
+          <a href="#rubric">5 · outcomes &amp; rubric</a>
+          <a href="#extensions">6 · extensions</a>
+          <a href="#references">7 · references</a>
+        </div>
+      </section>
+
+      <!-- 2. BRIEF & THESIS -->
+      <section class="demo" id="brief">
+        <h2>1 · The brief &amp; the thesis</h2>
+        <p class="cap">Before writing, a strong project fixes a single, contestable thesis and the question it answers. A thesis
+          that nobody could disagree with is not an argument; a thesis you cannot support is a slogan. The aim is the narrow band
+          in between.</p>
+
+        <div class="obj-block">
+          <h3>The driving question</h3>
+          <ul>
+            <li><em>How did one information technology — movable-type print — repeatedly redistribute power across five centuries, and what does its pattern predict about the algorithmic feed today?</em></li>
+          </ul>
+        </div>
+
+        <div class="thesis">
+          <span class="tlabel">Thesis</span>
+          The printing press is the clearest historical proof of the course's claim that <em>technology is never neutral</em>:
+          at every threshold it crossed — Reformation, science, the nation, mass politics, and the digital feed — it did not simply
+          "spread information" but <em>reorganized who could speak, who could be heard, and therefore who could rule.</em> Each
+          acceleration in reproducing the word widened access <em>and</em> concentrated new forms of control, so the press is best
+          read not as a story of liberation but, through Langdon Winner and Walter Benjamin, as a recurring <em>politics built into
+          a machine</em> — a politics whose latest edition is the personalized algorithmic feed.
+        </div>
+
+        <p class="lede">Note the shape of this thesis. It is <b>specific</b> (movable type, five named thresholds), it is
+          <b>contestable</b> (it argues <em>against</em> the comfortable "print = freedom" story), and it is <b>cumulative</b>
+          (it promises a single arc, not a survey). It also names its theoretical lens up front — McLuhan for "the medium is the
+          message," Winner for "do artifacts have politics?", and Benjamin for what mechanical reproduction does to authority. Those
+          three thinkers are the spine that holds the eras together.</p>
+
+        <div class="split">
+          <div>
+            <h3>What the essay must deliver</h3>
+            <div class="obj-block" style="margin-top:0;">
+              <ol>
+                <li>A thesis stated in the first 150 words and <b>never abandoned</b>.</li>
+                <li>Five to six eras, each with one claim, named evidence, and a "so what".</li>
+                <li>An honest <b>counter-argument</b> and a synthesis that answers it.</li>
+                <li>An <b>annotated bibliography</b> distinguishing primary, secondary and theoretical sources.</li>
+                <li>Explicit use of the four-part <b>sustainability lens</b> at least twice.</li>
+              </ol>
+            </div>
+          </div>
+          <div>
+            <h3>What earns and loses marks</h3>
+            <div class="obj-block" style="margin-top:0;">
+              <ul>
+                <li><b>Earns:</b> a claim that could be wrong, defended with a named work; tying each era back to the thesis; using a counter-argument to strengthen, not weaken.</li>
+                <li><b>Loses:</b> narrating "what happened" without an argument; dropping in a quotation with no analysis; a conclusion that merely repeats the introduction.</li>
+                <li><b>Disqualifies:</b> undisclosed GenAI use — the <a href="./course.html#assessment">policy</a> requires acknowledgement of system, prompts and how output was used.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="frame-note"><strong>The lens, made explicit.</strong> Throughout, every era is read through the course's
+          four-part frame —
+          <span class="lens-key" style="display:inline-flex;vertical-align:middle;margin:0 0 0 0.3em;">
+            <span class="lens env">ENV</span><span class="lens gov">GOV</span><span class="lens soc">SOC</span><span class="lens econ">ECON</span>
+          </span>
+          (Environment · Governance · Social Challenge · Economic Development). A good essay does not tick all four every time; it
+          reaches for the one or two that the evidence actually supports.</p>
+      </section>
+
+      <!-- 3. ERA-BY-ERA ARGUMENT -->
+      <section class="demo" id="argument">
+        <h2>2 · The era-by-era argument (worked)</h2>
+        <p class="cap">The body of the essay. Each step makes <b>one claim</b>, grounds it in <b>named evidence</b>, applies the
+          <b>lens</b>, and closes with a <b>so-what</b> that advances the single thesis. Read top to bottom, the claims should
+          compound into the argument that print repeatedly redistributed power.</p>
+
+        <ol class="eras">
+
+          <li class="era">
+            <span class="era-num">ERA 0 · ORIGINS (before c. 1450)</span>
+            <p class="era-title">The press inherits writing's politics — it does not invent them</p>
+            <p class="era-claim">Claim: print is the third great compression of the word, and to read it we must start with what writing already did to power.</p>
+            <p>The course's first information technology is writing itself (<a href="./course.html#program">Session 3</a>): the
+              alphabet "externalizes memory and rewires perception." Print does not begin the story of information-as-power; it
+              <em>accelerates</em> a story that runs from Sumerian clay tablets through the Phoenician alphabet — "from the alphabet
+              to Alphabet." Movable type also arrives late and unevenly: woodblock printing existed in East Asia for centuries
+              before Gutenberg, so the European 1450 date marks a <em>local</em> acceleration, not a world first.</p>
+            <div class="evidence">
+              <b>Evidence:</b> McLuhan, <em>The Medium is the Message</em> — media as extensions of the human sensorium (S3).
+              <b>Concept:</b> <em>collective learning</em> — each medium changes how much knowledge survives transmission
+              (<a href="./index.html#learning">demo 9</a>).
+            </div>
+            <div class="so-what"><b>So what:</b> framing print as an <em>acceleration</em> of an existing politics — not a fresh
+              start — is what lets the thesis carry forward to the feed. The variable that changes at each threshold is the same:
+              the cost of reproducing the word.</div>
+            <div class="lens-key"><span class="lens gov">GOV</span><span class="lens soc">SOC</span></div>
+            <p class="xref">Course link: <a href="./course.html#program">Session 3 — Time, Agriculture &amp; Writing</a> · Demo: <a href="./index.html#ideas">idea map (writing → alphabet → print)</a></p>
+          </li>
+
+          <li class="era">
+            <span class="era-num">ERA 1 · REFORMATION (c. 1450–1550)</span>
+            <p class="era-title">Cheap print turns a local dispute into the first viral media event</p>
+            <p class="era-claim">Claim: the press did not "cause" the Reformation, but it changed who could broadcast — and that shift of broadcast power was itself political.</p>
+            <p>Luther's Ninety-five Theses (1517) spread across German-speaking Europe in weeks because pamphlets were now cheap,
+              short and reproducible. The Church's monopoly on authoritative text — copied slowly by scribes it controlled — broke.
+              This is the thesis in miniature: a fall in reproduction cost <em>redistributed</em> who could be heard, and a religious
+              order that depended on controlling the word lost its grip.</p>
+            <div class="evidence">
+              <b>Primary:</b> Luther's vernacular pamphlets and German Bible (the technology made the vernacular viable at scale).
+              <b>Secondary:</b> Elizabeth Eisenstein, <em>The Printing Press as an Agent of Change</em> — print as the precondition
+              for standardization and wide circulation. <b>Theory:</b> McLuhan — the <em>form</em> (cheap, repeatable pamphlet)
+              mattered more than any single doctrine it carried.
+            </div>
+            <div class="so-what"><b>So what:</b> the first crossing already shows the double edge — wider access to scripture
+              <em>and</em> a new propaganda capacity that the same century turned to witch-hunting manuals and confessional
+              warfare. Liberation and control arrive together, not in sequence.</div>
+            <div class="lens-key"><span class="lens gov">GOV</span><span class="lens soc">SOC</span></div>
+            <p class="xref">Course link: <a href="./course.html#program">Session 6 — collective learning / transmission</a> · Demo: <a href="./index.html#scurve">diffusion S-curves</a></p>
+          </li>
+
+          <li class="era">
+            <span class="era-num">ERA 2 · SCIENTIFIC REVOLUTION (c. 1550–1700)</span>
+            <p class="era-title">Reproducible diagrams make cumulative science possible</p>
+            <p class="era-claim">Claim: print's deeper effect was not speed but <em>fixity</em> — the exact, repeatable reproduction of figures, tables and observations that lets knowledge accumulate.</p>
+            <p>A hand-copied star chart degrades with every copy; a printed one does not. Eisenstein's argument is that this
+              <em>typographical fixity</em> — identical editions, page numbers, indexes, errata — is what let scholars across Europe
+              point to "the same figure on the same page" and build on each other. This is <em>collective learning</em>
+              (<a href="./index.html#learning">demo 9</a>) given a new substrate, and it is the engine behind the course's
+              <a href="./index.html#accel">accelerating-returns</a> curve.</p>
+            <div class="evidence">
+              <b>Secondary:</b> Eisenstein on typographical fixity and standardization. <b>Concept:</b> the Enlightenment's lasting
+              invention was <em>method</em> — "a system for producing reliable, cumulative knowledge" (<a href="./course.html#program">Sessions 10–11</a>),
+              which is impossible without a medium that does not mutate as it copies.
+            </div>
+            <div class="so-what"><b>So what:</b> here the lens turns to <span class="lens econ" style="font-size:0.62rem;">ECON</span> —
+              fixity created a market in reliable knowledge (academies, journals, encyclopaedias) and thereby a new class of people
+              who profited from controlling that market. Access widened; gatekeeping simply moved.</div>
+            <div class="lens-key"><span class="lens gov">GOV</span><span class="lens econ">ECON</span></div>
+            <p class="xref">Course link: <a href="./course.html#program">Sessions 10–11 — the Enlightened Innovators</a> · Demos: <a href="./index.html#accel">accelerating returns</a>, <a href="./index.html#learning">collective learning</a></p>
+          </li>
+
+          <li class="era">
+            <span class="era-num">ERA 3 · THE NATION (c. 1700–1900)</span>
+            <p class="era-title">Print capitalism manufactures the "imagined community"</p>
+            <p class="era-claim">Claim: the press did not just inform citizens of the nation — it <em>built</em> the nation, by standardizing language and synchronizing millions of strangers around the same daily text.</p>
+            <p>The course frames the newspaper as "print capitalism manufacturing a shared imagined community of strangers"
+              (<a href="./course.html#program">Session 13</a>). Standardized print fixed dialects into national languages; the
+              shared morning paper made millions imagine themselves moving through the same time, the same "us." The Grimm Brothers'
+              folklore was "collected and edited into national identity." Print here is governance technology: it produces the very
+              population a state then governs.</p>
+            <div class="evidence">
+              <b>Secondary:</b> Benedict Anderson, <em>Imagined Communities</em> — the nation as constructed through print
+              (course concept <a href="./course.html#glossary">"imagined community"</a>). <b>Course material:</b> Renan vs. von
+              Herder on civic vs. ethnic nationhood; the Grimm Brothers and the "good-guy/bad-guy myth" (S13).
+            </div>
+            <div class="so-what"><b>So what:</b> the same machine that empowered a reading public also gave the state and, soon,
+              the tabloid (<a href="./course.html#program">Session 16</a>) an instrument of mass persuasion. The thesis tightens:
+              print's reach is always also a reach <em>over</em> people.</div>
+            <div class="lens-key"><span class="lens gov">GOV</span><span class="lens soc">SOC</span></div>
+            <p class="xref">Course link: <a href="./course.html#program">Session 13 — The Nation as Innovation</a> · Demo: <a href="./index.html#revolutions">revolutions timeline</a></p>
+          </li>
+
+          <li class="era">
+            <span class="era-num">ERA 4 · MASS POLITICS &amp; TOTAL WAR (c. 1900–1945)</span>
+            <p class="era-title">Mechanical reproduction becomes propaganda — Benjamin's warning</p>
+            <p class="era-claim">Claim: once reproduction is industrial, the politics inside the press becomes unmistakable; the tabloid and the propaganda poster are print's threshold into mass manipulation.</p>
+            <p>Walter Benjamin's "The Work of Art in the Age of Mechanical Reproduction" argues that mass reproduction strips the
+              "aura" of the unique work and opens art — and information — to political mobilization. The course's "tabloid newspaper"
+              and "the birth of the attention economy" (<a href="./course.html#program">Session 16</a>), then the propaganda of the
+              world wars (Sessions 18–19), are exactly this: reproduction at industrial scale, turned to manufacturing consent.</p>
+            <div class="evidence">
+              <b>Theory:</b> Walter Benjamin, <em>The Work of Art in the Age of Mechanical Reproduction</em> — aura, reproduction
+              and the politicization of media. <b>Course material:</b> the tabloid and the attention economy (S16); WWI/WWII
+              propaganda (S18–S19). <b>Frame:</b> Beck's <em>risk society</em> — modernity manufacturing its own "bads"
+              (<a href="./course.html#glossary">glossary</a>).
+            </div>
+            <div class="so-what"><b>So what:</b> this is the essay's pivot. If reproducible media can be aimed at a mass mind, then
+              "more information" is not automatically "more freedom" — the conclusion the comfortable story refuses. Benjamin gives
+              the thesis its sharpest edge.</div>
+            <div class="lens-key"><span class="lens gov">GOV</span><span class="lens soc">SOC</span></div>
+            <p class="xref">Course link: <a href="./course.html#program">Sessions 16, 18–19 · 20 (the brand)</a> · Demo: <a href="./index.html#accel">accelerating returns</a></p>
+          </li>
+
+          <li class="era">
+            <span class="era-num">ERA 5 · THE DIGITAL FEED (c. 1990–present)</span>
+            <p class="era-title">The algorithmic feed is movable type's final edition — and its inversion</p>
+            <p class="era-claim">Claim: the personalized feed completes print's trajectory by driving reproduction cost to zero — and then inverts it, because the medium now reproduces a different page for every reader.</p>
+            <p>Print fixed one identical page for everyone; that fixity built shared science and shared nations. The feed reverses
+              this: reproduction is free and infinite, but the page is now <em>personalized</em>, so the shared text that print
+              created dissolves into Baudrillard's <a href="./course.html#glossary">hyperreality</a> — "simulations with no
+              original" (<a href="./course.html#program">Session 25</a>). McLuhan returns at full force in Carr's <em>The Shallows</em>
+              (S26): the medium rewires the user. Winner's question — <em>do artifacts have politics?</em> — answers itself when an
+              engagement-optimizing ranking model decides who is heard.</p>
+            <div class="evidence">
+              <b>Theory:</b> Langdon Winner, "Do Artifacts Have Politics?" — designs embed power arrangements. <b>Course readings:</b>
+              Baudrillard on hyperreality and Carr, <em>The Shallows</em> (S25–26); Harari, <em>Nexus</em>, on information networks as
+              the deep history of power. <b>Concept:</b> platforms as "quasi-sovereign geopolitical actors" (S25).
+            </div>
+            <div class="so-what"><b>So what:</b> the thesis lands. From Luther's pamphlet to the ranked feed, every drop in
+              reproduction cost redistributed who could speak <em>and</em> created a new chokepoint of control — the printer's
+              guild, the state, the press baron, now the recommendation algorithm. The machine's politics never left; it only
+              changed owners.</div>
+            <div class="lens-key"><span class="lens gov">GOV</span><span class="lens soc">SOC</span><span class="lens econ">ECON</span></div>
+            <p class="xref">Course link: <a href="./course.html#program">Sessions 25–26 — Digitalism</a> · Demos: <a href="./index.html#scurve">diffusion S-curves</a>, <a href="./index.html#learning">collective learning</a></p>
+          </li>
+        </ol>
+
+        <div class="callout">
+          <h4>The through-line, in one sentence</h4>
+          Each era lowered the cost of reproducing the word, and each time that wider reach was matched by a <em>new</em>
+          gatekeeper — which is precisely Winner's claim that the politics is built into the artifact, not bolted on afterward.
+          A reader should be able to recover this sentence from the six claims alone.
+        </div>
+      </section>
+
+      <!-- 4. SOURCES & METHODOLOGY -->
+      <section class="demo" id="sources">
+        <h2>3 · Sources &amp; methodology</h2>
+        <p class="cap">A humanities argument is only as good as its evidence discipline. This section shows how to classify sources
+          and what each one is actually doing in the argument — the heart of a strong <b>annotated</b> bibliography.</p>
+
+        <div class="obj-block">
+          <h3>Method, in four moves</h3>
+          <ol>
+            <li><b>Separate kinds of source.</b> <em>Primary</em> = the artifact or its contemporaries (a Luther pamphlet); <em>secondary</em> = historians explaining it (Eisenstein, Anderson); <em>theory</em> = the lens you read through (McLuhan, Winner, Benjamin). Mixing these up is the most common way to lose marks.</li>
+            <li><b>Make each source do one job.</b> A source either supplies a fact, an interpretation, or a frame — say which.</li>
+            <li><b>Cross-check, especially AI output.</b> Per the course <a href="./course.html#assessment">GenAI policy</a>, treat any generated claim as wrong until verified against a named source; you own the errors.</li>
+            <li><b>Apply the lens deliberately.</b> Don't sprinkle ENV/GOV/SOC/ECON tags — reach for the one the evidence supports.</li>
+          </ol>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="grid">
+            <thead>
+              <tr><th>Source</th><th>Type</th><th>What it proves in <em>this</em> essay</th><th>Used in</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="src">McLuhan, <em>The Medium is the Message</em></td>
+                <td>Theory</td>
+                <td>That the press's <b>form</b> (cheap, repeatable, identical) shapes society more than any single text it carries.</td>
+                <td class="where">Era 0,1,5</td>
+              </tr>
+              <tr>
+                <td class="src">Luther, vernacular pamphlets &amp; German Bible</td>
+                <td>Primary</td>
+                <td>That a fall in reproduction cost let a non-elite broadcast at scale and break a textual monopoly.</td>
+                <td class="where">Era 1</td>
+              </tr>
+              <tr>
+                <td class="src">Eisenstein, <em>The Printing Press as an Agent of Change</em></td>
+                <td>Secondary</td>
+                <td>That <b>typographical fixity</b> — not speed — enabled cumulative science and standardization.</td>
+                <td class="where">Era 1,2</td>
+              </tr>
+              <tr>
+                <td class="src">Anderson, <em>Imagined Communities</em></td>
+                <td>Secondary</td>
+                <td>That print capitalism <b>built</b> national identity by standardizing language and synchronizing strangers.</td>
+                <td class="where">Era 3</td>
+              </tr>
+              <tr>
+                <td class="src">Benjamin, <em>Work of Art in the Age of Mechanical Reproduction</em></td>
+                <td>Theory</td>
+                <td>That industrial reproduction strips "aura" and opens media to political mobilization — print's dark turn.</td>
+                <td class="where">Era 4</td>
+              </tr>
+              <tr>
+                <td class="src">Winner, "Do Artifacts Have Politics?"</td>
+                <td>Theory</td>
+                <td>The thesis's backbone: that power arrangements are <b>built into</b> a technology's design, not added later.</td>
+                <td class="where">Era 5 + thesis</td>
+              </tr>
+              <tr>
+                <td class="src">Baudrillard, <em>hyperreality</em>; Carr, <em>The Shallows</em></td>
+                <td>Theory / Secondary</td>
+                <td>That the personalized feed dissolves print's <em>shared</em> page and rewires cognition.</td>
+                <td class="where">Era 5</td>
+              </tr>
+              <tr>
+                <td class="src">Headrick, <em>Technology: A World History</em></td>
+                <td>Secondary (backbone)</td>
+                <td>The material chronology that keeps dates and global context honest (the course textbook).</td>
+                <td class="where">All eras</td>
+              </tr>
+              <tr>
+                <td class="src">Beck, <em>Risk Society</em></td>
+                <td>Theory</td>
+                <td>That advanced media manufacture their own "bads" — propaganda, then algorithmic risk.</td>
+                <td class="where">Era 4,5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="frame-note"><strong>Honesty check.</strong> A worked example must model intellectual honesty: Eisenstein's
+          "fixity" thesis has been challenged (Adrian Johns argues print was initially <em>unreliable</em> and that fixity was a
+          social achievement, not an automatic property of the machine). A strong essay names this dispute rather than hiding it —
+          and it feeds directly into the counter-argument below.</p>
+      </section>
+
+      <!-- 5. COUNTER-ARGUMENTS & SYNTHESIS -->
+      <section class="demo" id="synthesis">
+        <h2>4 · Counter-arguments &amp; synthesis</h2>
+        <p class="cap">The section that separates an A from a B. A thesis that never meets its strongest objection has not been
+          defended — it has only been asserted. Here we state the best case <em>against</em> the thesis, then show why the thesis
+          survives in a more precise form.</p>
+
+        <div class="split">
+          <div>
+            <h3>The strongest objection</h3>
+            <p class="lede"><b>"Print was liberating, full stop."</b> The optimist's case is real: print drove mass literacy,
+              the Republic of Letters, the abolitionist press, and the cheap diffusion of dissenting ideas that toppled censors.
+              To call it "a politics of control" looks like cynicism that ignores the genuine widening of the public sphere.</p>
+            <p class="lede"><b>The technological-determinism trap.</b> A related objection: the thesis risks claiming the
+              <em>machine</em> caused the Reformation, the nation and the feed. But Luther needed grievances, Anderson's nation
+              needed capitalism, and the feed needs an attention economy. Adrian Johns' critique of Eisenstein sharpens this — fixity
+              and reach were <em>social</em> achievements, not automatic outputs of the press.</p>
+          </div>
+          <div>
+            <h3>The synthesis (how the thesis survives)</h3>
+            <p class="lede"><b>Reframe from "cause" to "redistribution."</b> The thesis never claimed print <em>caused</em> these
+              events; it claimed print <em>changed who could speak and be heard</em>, and that this redistribution is inherently
+              political. That is precisely Winner's "do artifacts have politics?" — not determinism, but the observation that a
+              technology's design <em>privileges</em> some arrangements of power over others.</p>
+            <p class="lede"><b>Hold both truths at once.</b> Print genuinely widened access <em>and</em> created new chokepoints
+              every single time. The optimist sees only the first; the cynic only the second. The course's lens — read every
+              innovation through Environment, Governance, Social Challenge and Economic Development — exists precisely to refuse
+              that either/or. The press is liberating <em>and</em> controlling, and the interesting history is the relationship
+              between the two.</p>
+          </div>
+        </div>
+
+        <div class="thesis" style="margin-top:1rem;">
+          <span class="tlabel">Refined thesis (the conclusion)</span>
+          The printing press is not a story of liberation <em>or</em> control but of their permanent entanglement: every reduction
+          in the cost of reproducing the word widened who could speak <em>and</em> created a new gatekeeper over what was heard.
+          The algorithmic feed is the latest term in that series — and reading it through Winner and Benjamin, rather than through
+          techno-optimism, is the course's central lesson about <em>how to think about the next innovation before it arrives.</em>
+        </div>
+
+        <div class="callout">
+          <h4>Why this is a strong conclusion</h4>
+          It does not repeat the introduction — it has <em>moved</em>: from "technology is never neutral" (a course slogan) to a
+          precise, defended mechanism (cost-of-reproduction redistributes voice and creates new gatekeepers) that the reader can now
+          apply to AI, the topic of <a href="./course.html#program">Part 3</a>. A conclusion should leave the reader with a tool,
+          not a summary.
+        </div>
+      </section>
+
+      <!-- 6. OUTCOMES & RUBRIC -->
+      <section class="demo" id="rubric">
+        <h2>5 · Mapping to learning outcomes + the rubric</h2>
+        <p class="cap">How this project would actually be graded, and which course outcomes each part exercises. The rubric weights
+          mirror the spirit of the <a href="./course.html#assessment">block-work criterion</a> — argument, use of course concepts,
+          and depth.</p>
+
+        <div class="obj-block">
+          <h3>Which learning outcomes the project hits</h3>
+        </div>
+        <div class="tbl-wrap">
+          <table class="grid">
+            <thead>
+              <tr><th>Course outcome (from the outline)</th><th>Where this project demonstrates it</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Explain how a technology is a <em>human extension</em> that reorganizes society, power and the self <span class="pill">Part 1</span></td><td>The whole thesis; Eras 1–3 most directly.</td></tr>
+              <tr><td>Use Baudrillard's <em>hyperreality</em> and Carr's <em>Shallows</em> to analyze digital media <span class="pill">Part 3</span></td><td>Era 5 — the feed as print's inversion.</td></tr>
+              <tr><td>Read media (McLuhan) as extensions of the human sensorium <span class="pill">S3, S26</span></td><td>Era 0 and Era 5 bookend the argument with McLuhan.</td></tr>
+              <tr><td>Apply the humanities / gendered / sustainability lens to innovation <span class="pill">cross-cutting</span></td><td>ENV/GOV/SOC/ECON tags on every era; lens-driven synthesis.</td></tr>
+              <tr><td>Articulate a reasoned ethical position on a technology's power <span class="pill">Part 3</span></td><td>The counter-argument and refined conclusion.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="obj-block" style="margin-top:1.1rem;">
+          <h3>Assessment rubric (100 points)</h3>
+        </div>
+        <div class="tbl-wrap">
+          <table class="grid">
+            <thead>
+              <tr><th>Criterion</th><th>Excellent (full marks)</th><th>Weak (half or less)</th><th class="wt">Weight</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="src">Thesis &amp; argument</td>
+                <td>One contestable thesis, stated early, carried through every era and <em>refined</em> by the end.</td>
+                <td>A topic, not a claim; the essay narrates events without an argument.</td>
+                <td class="wt">25</td>
+              </tr>
+              <tr>
+                <td class="src">Use of course concepts</td>
+                <td>McLuhan, Winner, Benjamin, hyperreality and the lens are <em>used</em> to do analytical work, not name-dropped.</td>
+                <td>Concepts mentioned in passing or misapplied.</td>
+                <td class="wt">20</td>
+              </tr>
+              <tr>
+                <td class="src">Evidence &amp; sources</td>
+                <td>Named primary/secondary/theory sources, correctly classified and annotated; claims are anchored.</td>
+                <td>Vague "studies show"; quotations dropped in without analysis; AI use undisclosed.</td>
+                <td class="wt">20</td>
+              </tr>
+              <tr>
+                <td class="src">Counter-argument &amp; synthesis</td>
+                <td>The strongest objection is stated fairly and answered, sharpening the thesis.</td>
+                <td>No counter-argument, or a straw man easily knocked down.</td>
+                <td class="wt">15</td>
+              </tr>
+              <tr>
+                <td class="src">Structure &amp; cumulative arc</td>
+                <td>Each era's "so what" advances the single argument; the reader feels momentum.</td>
+                <td>Six disconnected mini-essays; the conclusion repeats the intro.</td>
+                <td class="wt">10</td>
+              </tr>
+              <tr>
+                <td class="src">Lens &amp; ethics</td>
+                <td>The ENV/GOV/SOC/ECON lens is applied where the evidence supports it; an ethical stance is reasoned.</td>
+                <td>Lens tags decorative; no ethical reflection.</td>
+                <td class="wt">10</td>
+              </tr>
+              <tr class="total">
+                <td>Total</td><td></td><td></td><td class="wt">100</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="frame-note"><strong>Self-grade before you submit.</strong> Run your own draft against this rubric and write your
+          predicted score in your <a href="./course.html#assessment">hand-written journal</a>. If you cannot point to the sentence
+          that earns each criterion, that criterion is not yet met.</p>
+      </section>
+
+      <!-- 7. EXTENSIONS -->
+      <section class="demo" id="extensions">
+        <h2>6 · Extensions — other innovations to trace</h2>
+        <p class="cap">The template is the point. Swap the printing press for any of these and the same structure — thesis, era-by-era
+          claims with named evidence, counter-argument, lens, rubric — produces a strong essay. Each card sketches a starting thesis
+          and the course sessions it would draw on.</p>
+
+        <div class="alt-grid">
+          <div class="alt-card">
+            <h4>The steam engine</h4>
+            <p>Thesis: steam de-coupled production from muscle and weather, inventing both the factory clock and the modern
+              environmental crisis. Pair industrialism's promise with <em>Frankenstein</em>'s warning.</p>
+            <span class="span">→ S12, S14 · Headrick ch. 6–7 · demo: population, accelerating returns</span>
+          </div>
+          <div class="alt-card">
+            <h4>Gunpowder</h4>
+            <p>Thesis: a chemical reaction redistributed sovereignty, letting small European states partition the globe — innovation
+              as conquest, read through Joler's <em>Calculating Empires</em>.</p>
+            <span class="span">→ S9 · Headrick ch. 5 · demo: idea map, revolutions timeline</span>
+          </div>
+          <div class="alt-card">
+            <h4>The transistor / silicon chip</h4>
+            <p>Thesis: miniaturization turned computation into a utility, and Moore's-law doubling made acceleration itself a
+              business model — the hardware behind the singularity debate.</p>
+            <span class="span">→ S21, S25, S27 · demo: accelerating returns, S-curves</span>
+          </div>
+          <div class="alt-card">
+            <h4>The clock</h4>
+            <p>Thesis: mechanical timekeeping abstracted time from nature, making the factory, the timetable and the synchronized
+              nation possible — time as a governance technology.</p>
+            <span class="span">→ S3, S13 · demo: cosmic clock</span>
+          </div>
+          <div class="alt-card">
+            <h4>The vaccine / germ theory</h4>
+            <p>Thesis: an invisible-cause theory reorganized the state's relationship to the body, inventing public health — and the
+              politics of who counts as worth saving.</p>
+            <span class="span">→ S16 · lens: ENV/SOC · demo: population growth</span>
+          </div>
+          <div class="alt-card">
+            <h4>The recommendation algorithm</h4>
+            <p>Thesis: the feed is the first technology whose <em>product is attention itself</em>; trace it from the tabloid through
+              Baudrillard to today's quasi-sovereign platforms.</p>
+            <span class="span">→ S16, S25–26 · theory: Benjamin, Winner, Carr</span>
+          </div>
+        </div>
+
+        <div class="callout">
+          <h4>Turning any card into the op-ed</h4>
+          For the graded <a href="./course.html#assessment">1,000-word op-ed + recorded talk</a>: pick one card, write the thesis,
+          choose the <em>two</em> most surprising eras, open with the present-day stakes, and end with the refined claim. The
+          10-minute talk is then the same argument spoken aloud — thesis, two pieces of evidence, the counter-argument, the
+          conclusion.
+        </div>
+      </section>
+
+      <!-- 8. REFERENCES -->
+      <section class="demo" id="references">
+        <h2>7 · References (annotated)</h2>
+        <p class="cap">The model bibliography for this worked example, split by role in the argument. Course-set readings are marked;
+          the rest are the standard scholarly sources a strong essay on print would cite. Each annotation says what the source
+          <em>does</em>, not just what it is.</p>
+
+        <div class="split">
+          <div>
+            <h3>Theory &amp; course-set readings</h3>
+            <ul class="biblio">
+              <li>Marshall McLuhan — <em>The Medium is the Message</em>
+                <span class="anno">Media as extensions of the sensorium; form over content — the lens for Eras 0, 1 and 5. <span class="where">course S3, S26</span></span></li>
+              <li>Langdon Winner — "Do Artifacts Have Politics?" (1980)
+                <span class="anno">The thesis's backbone: power arrangements are built into design. <span class="where">essay's central frame</span></span></li>
+              <li>Walter Benjamin — "The Work of Art in the Age of Mechanical Reproduction" (1935)
+                <span class="anno">Aura, reproduction and the politicization of media — Era 4's pivot. <span class="where">theory</span></span></li>
+              <li>Jean Baudrillard — <em>Simulacra and Simulation</em> (hyperreality)
+                <span class="anno">The personalized feed as simulation with no original. <span class="where">course S25</span></span></li>
+              <li>Nicholas Carr — <em>The Shallows</em>
+                <span class="anno">How the net trades cognitive depth for breadth — McLuhan, updated. <span class="where">course S26</span></span></li>
+              <li>Ulrich Beck — <em>Risk Society</em>
+                <span class="anno">Modernity manufacturing its own "bads," from propaganda to algorithmic risk. <span class="where">course S2</span></span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Primary, secondary &amp; backbone</h3>
+            <ul class="biblio">
+              <li>Daniel R. Headrick — <em>Technology: A World History</em>, Oxford
+                <span class="anno">The course textbook; keeps the chronology and global context honest across every era. <span class="where">course backbone</span></span></li>
+              <li>Elizabeth Eisenstein — <em>The Printing Press as an Agent of Change</em> (1979)
+                <span class="anno">The classic case for typographical fixity and standardization — Eras 1–2. <span class="where">secondary</span></span></li>
+              <li>Adrian Johns — <em>The Nature of the Book</em> (1998)
+                <span class="anno">The counter-case: fixity was a social achievement, not an automatic property — feeds the counter-argument. <span class="where">secondary</span></span></li>
+              <li>Benedict Anderson — <em>Imagined Communities</em> (1983)
+                <span class="anno">Print capitalism as the builder of national identity — Era 3. <span class="where">secondary; course concept</span></span></li>
+              <li>Martin Luther — Ninety-five Theses; vernacular pamphlets &amp; German Bible
+                <span class="anno">Primary witnesses to print breaking a textual monopoly — Era 1. <span class="where">primary</span></span></li>
+              <li>Yuval N. Harari — <em>Nexus</em>
+                <span class="anno">Information networks as the deep history — and danger — of power; bridges print to AI. <span class="where">course S25</span></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="frame-note"><strong>Citation &amp; AI note.</strong> In submission, every source above would carry a full citation
+          in a consistent style, and any GenAI assistance (system, prompts, how output was used) would be disclosed per the
+          <a href="./course.html#assessment">course policy</a> — disclosure does not affect the grade, but undisclosed use is an
+          academic-honesty violation.</p>
+
+        <div class="stepnav" style="margin-top:0.9rem;">
+          <a href="./index.html">← interactive demos</a>
+          <a href="./course.html">course outline</a>
+          <a href="./course.html#assessment">assessment &amp; block work</a>
+          <a href="#overview">↑ back to top</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>big-history-lab — Andrea Montana · IE BCSAI</span>
+      <span class="more">
+        <a href="./index.html">interactive demos</a>
+        <a href="./course.html">course outline</a>
+        <a href="./SYLLABUS.pdf" target="_blank">syllabus PDF</a>
+        <a href="https://github.com/andreaisabelmontana/big-history-lab" target="_blank">source</a>
+      </span>
+    </footer>
+  </body>
+</html>
