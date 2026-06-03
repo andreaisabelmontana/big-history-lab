@@ -116,9 +116,46 @@
       .xref a { font-weight: 600; }
 
       .biblio { margin: 0; padding-left: 1.1rem; }
-      .biblio li { color: var(--ink-soft); font-size: 0.84rem; margin-bottom: 0.4rem; }
+      .biblio li { color: var(--ink-soft); font-size: 0.84rem; margin-bottom: 0.45rem; line-height: 1.5; }
       .biblio li em { color: var(--ink); font-style: italic; }
+      .biblio li .anno { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 0.1rem; }
+      .biblio li .where { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); }
       .pill { font-family: var(--font-mono); font-size: 0.66rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 0.05em 0.45em; margin-left: 0.3em; }
+
+      /* per-session key idea + reading annotations (enrichment) */
+      .key-idea {
+        margin: 0.35rem 0 0.3rem; padding: 0.4rem 0.7rem;
+        border-left: 3px solid var(--accent); background: var(--accent-soft);
+        border-radius: 0 6px 6px 0; font-size: 0.79rem; color: var(--ink-soft);
+      }
+      .key-idea strong { color: var(--accent); font-weight: 700; }
+      .sess ul.topics li b { color: var(--ink); font-weight: 600; }
+      .reads { list-style: none; margin: 0.3rem 0 0.2rem; padding: 0; }
+      .reads li {
+        font-size: 0.78rem; color: var(--muted); margin-bottom: 0.22rem; padding-left: 0.9rem; position: relative;
+      }
+      .reads li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.05rem; }
+      .reads li b { color: var(--ink-soft); font-weight: 600; }
+
+      /* module learning outcomes */
+      .outcomes {
+        margin: 0.2rem 0 0.7rem; padding: 0.55rem 0.8rem;
+        border: 1px solid var(--rule); border-radius: 6px; background: var(--bg);
+      }
+      .outcomes h4 {
+        font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase;
+        letter-spacing: 0.03em; margin: 0 0 0.35rem;
+      }
+      .outcomes ul { margin: 0; padding-left: 1.05rem; }
+      .outcomes li { color: var(--ink-soft); font-size: 0.8rem; margin-bottom: 0.2rem; }
+
+      /* glossary */
+      .glossary {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 0.6rem 1.1rem; margin-top: 0.5rem;
+      }
+      .glossary dt { font-size: 0.84rem; font-weight: 700; color: var(--ink); margin-bottom: 0.1rem; }
+      .glossary dd { margin: 0 0 0.55rem; font-size: 0.8rem; color: var(--ink-soft); line-height: 1.5; }
     </style>
   </head>
   <body>
@@ -133,6 +170,7 @@
         <a href="#objectives">objectives</a>
         <a href="#assessment">methodology</a>
         <a href="#program">program</a>
+        <a href="#glossary">glossary</a>
         <a href="#biblio">bibliography</a>
         <a href="./SYLLABUS.pdf" target="_blank">syllabus PDF</a>
       </nav>
@@ -243,10 +281,53 @@
               <div class="bar-row"><span class="lbl">Block work (1000-word op-ed + recorded talk)</span><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><span class="pct">25%</span></div>
               <div class="bar-row"><span class="lbl">Final exam</span><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><span class="pct">25%</span></div>
             </div>
-            <p class="xref" style="margin-top:0.6rem;">Minimum final-exam grade 3.5; below this sends the student to the
-              re-sit regardless of overall grade. 80% attendance required.</p>
+            <p class="xref" style="margin-top:0.6rem;">Two written exams plus one written assignment; classroom work also
+              counts. Exams test understanding of topics and slides; the final is comprehensive.</p>
           </div>
         </div>
+
+        <!-- detailed deliverables -->
+        <div class="obj-block" style="margin-top:1.1rem;">
+          <h3>What each component asks of you</h3>
+        </div>
+        <div class="split">
+          <div>
+            <h3>Class participation · 25%</h3>
+            <p class="lede"><b>Deliverable:</b> a hand-written class journal brought to <em>every</em> session and
+              submitted periodically and at term's end. <b>Why pen and paper:</b> in a course about innovation, the
+              professor deliberately revives a skill the digital era neglects — writing and summarizing by hand — which
+              also prepares you for the written exams.</p>
+            <p class="lede"><b>Evaluated on:</b> the quality and consistency of hand-written notes; staying off laptop
+              and phone; not talking to classmates while the professor lectures. Both phone-checking and side-conversation
+              count explicitly as <em>not</em> participating.</p>
+            <h3 style="margin-top:0.9rem;">Midterm exam · 25%</h3>
+            <p class="lede"><b>Deliverable:</b> a written, in-class exam (Session 15). <b>Evaluated on:</b> understanding
+              of the topics and slide content from Part 1 and the start of Part 2. Format is discussed in class beforehand.</p>
+          </div>
+          <div>
+            <h3>Block work · 25%</h3>
+            <p class="lede"><b>Deliverable:</b> from a set of approved subjects ("blocks"), a <b>1,000-word op-ed</b>
+              <em>and</em> a <b>10-minute recorded Zoom talk</b> presenting it, on a theme of innovation — anywhere from AI
+              to quantum. <b>Evaluated on:</b> argument, use of course concepts, and the chance to explore two aspects of
+              the course in depth.</p>
+            <h3 style="margin-top:0.9rem;">Final exam · 25%</h3>
+            <p class="lede"><b>Deliverable:</b> a comprehensive written, in-class exam (Session 29) covering <em>all</em>
+              aspects of the course. <b>Evaluated on:</b> synthesis across the three parts. Format discussed in class.</p>
+          </div>
+        </div>
+
+        <p class="frame-note"><strong>Pass &amp; attendance rules.</strong> The <b>minimum final-exam grade is 3.5</b>;
+          score below it and you go to the re-sit regardless of your overall grade. <b>80% attendance is required</b> —
+          fall below it and you fail both the ordinary and extraordinary calls for the year and must re-enrol.
+          Students have <b>four chances</b> to pass a course across two academic years. The June/July re-sit is a single
+          comprehensive exam (continuous-evaluation marks no longer count), is sat in person in Segovia or Madrid, and is
+          capped at <b>8.0/10</b> ("notable"). Failing more than 18 ECTS in a year after the re-sits means leaving the
+          programme. A grade-review session follows each exam; attending it is a prerequisite for any appeal.</p>
+
+        <p class="frame-note" style="margin-top:0.6rem;"><strong>GenAI policy.</strong> Critical use of generative AI is
+          <em>encouraged</em> — the goal is an informed, sceptical perspective. Treat output as wrong until you can
+          cross-check it; you own any errors. AI use must be <b>acknowledged</b> (system, prompts, how the output was
+          used) — disclosure does not affect your grade, but undisclosed use violates academic-honesty policy.</p>
       </section>
 
       <!-- PROGRAM -->
@@ -265,36 +346,56 @@
           </div>
           <p class="module-desc">From the earliest epochs and hydraulic civilizations through the Axial Age, Islamic
             innovation, the Renaissance and the threshold of modernity — technology as a human extension.</p>
+          <div class="outcomes">
+            <h4>By the end of Part 1 you should be able to</h4>
+            <ul>
+              <li>Explain how a technology (writing, the chariot, gunpowder, the printing press) is not just a tool but a <em>human extension</em> that reorganizes society, power and the self.</li>
+              <li>Trace the long arc from Stone-Age tools and hydraulic civilizations to the early-modern "scientific revolution," using Headrick chapters 1–5 as the backbone.</li>
+              <li>Read myth, religion and philosophy (Gilgamesh, the Axial Age, the Tao) as <em>social technologies</em> that coordinate large populations.</li>
+              <li>Apply the humanities / gendered / sustainability lens — and, from Session 8, the Economic Development lens — to pre-modern innovation.</li>
+            </ul>
+          </div>
           <ol class="timeline">
 
             <li class="sess milestone">
               <span class="sess-num">SESSION 1</span>
               <p class="sess-title">Introduction</p>
-              <p class="sess-obj">Course framing and the sustainability lens (Environment · Governance · Social Challenge).</p>
+              <p class="sess-obj"><b>Driving question:</b> what is "innovation," and whose story does a history of technology usually leave out?</p>
               <ul class="topics">
-                <li>Course overview, expectations and the humanities/gendered/sustainability framework</li>
+                <li><b>Course framing &amp; expectations</b> — how the 30 sessions map onto three parts, and how the pen-and-paper journal works.</li>
+                <li><b>The cross-cutting lens</b> — every artifact is read through Environment, Governance and Social Challenge (with Economic Development added later), plus a humanities and gendered reading.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> technology is never neutral — each invention redistributes power, labour and risk, so a "big history" has to be a humanities story as much as an engineering one.</p>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 2</span>
               <p class="sess-title">Class Overview — modernity &amp; risk</p>
-              <p class="sess-obj">How innovation reshapes everyday life and produces new risks.</p>
+              <p class="sess-obj"><b>Driving question:</b> if every innovation solves a problem, what new dangers does it manufacture in return?</p>
               <ul class="topics">
-                <li>"Dumb Ways to Die"; the washing machine to Ulrich Beck's <em>Risk Society</em></li>
-                <li>"The History of the World, I Guess"; the modernity meme</li>
+                <li><b>"Dumb Ways to Die" &amp; the washing machine</b> — from a viral safety ad to how a mundane appliance liberated (largely women's) labour, leading into Ulrich Beck's argument that modernity industrially produces its own hazards.</li>
+                <li><b>"The History of the World, I Guess" &amp; the modernity meme</b> — using internet-native formats to ask how we narrate the whole human story at once.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea — risk society (Beck):</strong> advanced modernity stops merely distributing goods and starts distributing <em>"bads"</em> (pollution, nuclear and now algorithmic risk) that ignore class and borders.</p>
+              <ul class="reads"><li><b>Ulrich Beck, <em>Risk Society</em></b> — the framing text: read for the claim that modern hazards are manufactured, invisible and globally shared.</li></ul>
               <div class="tags"><span class="tag">Ulrich Beck</span><span class="tag read">Beck · Risk Society</span></div>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 3</span>
               <p class="sess-title">From Sumer, Iraq to Phoenicia: Time, Agriculture &amp; Writing</p>
-              <p class="sess-obj">The first information technologies and the rise of hydraulic civilizations.</p>
+              <p class="sess-obj"><b>Driving question:</b> how did writing — the first information technology — make cities, states and history itself possible?</p>
               <ul class="topics">
-                <li>McLuhan: writing as a human extension; Gilgamesh and sustainability; gender</li>
-                <li>Sumer (disease), "This Land is Mine"; Phoenicians — from the alphabet to Alphabet (Google); Ancient Egypt</li>
-                <li>Headrick 1 — Stone Age Technology; 2 — Hydraulic Civilizations (4000–1500 BCE)</li>
+                <li><b>McLuhan — writing as a human extension</b> — the alphabet externalizes memory and rewires perception; "the medium is the message."</li>
+                <li><b>Gilgamesh, sustainability &amp; gender</b> — the oldest epic read for deforestation (the Cedar Forest / Humbaba) and for its gendered figures, as a sustainability parable.</li>
+                <li><b>Hydraulic civilizations</b> — Sumer and disease, "This Land Is Mine," and Ancient Egypt: irrigation and the calendar as state-building tech.</li>
+                <li><b>Phoenicians — from the alphabet to Alphabet</b> — the phonetic alphabet as the ancestor of Google's parent company; writing as the original search engine.</li>
+              </ul>
+              <p class="key-idea"><strong>Key idea:</strong> agriculture plus writing created surplus, hierarchy and bureaucracy — the template for every later "platform" that stores and processes information.</p>
+              <ul class="reads">
+                <li><b><em>Gilgamesh</em> (excerpt)</b> — read as a sustainability and mortality myth, not just literature.</li>
+                <li><b>McLuhan, <em>The Medium Is the Message</em></b> — read for media as extensions of the human sensorium.</li>
+                <li><b>Headrick ch. 1–2</b> — Stone-Age tools; Hydraulic Civilizations (4000–1500 BCE) as the material backbone.</li>
               </ul>
               <div class="tags"><span class="tag read">Gilgamesh</span><span class="tag read">McLuhan · The Medium is the Message</span><span class="tag read">Headrick ch.1–2</span></div>
               <p class="xref">See demo: <a href="./index.html#ideas">idea map (writing → alphabet)</a> · <a href="./index.html#thresholds">threshold 7 — agriculture</a></p>
@@ -303,65 +404,80 @@
             <li class="sess">
               <span class="sess-num">SESSION 4</span>
               <p class="sess-title">The Axial Age I</p>
-              <p class="sess-obj">Mobility technologies and the birth of philosophy and narrative.</p>
+              <p class="sess-obj"><b>Driving question:</b> why did philosophy, ethics and storytelling all erupt across Eurasia at roughly the same moment — and is <em>story</em> the greatest invention of all?</p>
               <ul class="topics">
-                <li>Indo-European chariots and cannabis; Ancient Greece</li>
-                <li>Plato's Allegory of the Cave; Medusa; Aristotle's tragedy, the Hero's Journey, story as the greatest invention</li>
+                <li><b>Indo-European chariots and cannabis</b> — mobility and psychoactive technologies spreading language, myth and warfare across the steppe.</li>
+                <li><b>Ancient Greece — Plato's Allegory of the Cave &amp; Medusa</b> — knowledge, illusion and the politics of who controls the image.</li>
+                <li><b>Aristotle, tragedy &amp; the Hero's Journey</b> — narrative structure (Aristotle → Campbell) as a portable cognitive technology for transmitting values.</li>
               </ul>
-              <div class="tags"><span class="tag">Plato</span><span class="tag">Aristotle</span></div>
+              <p class="key-idea"><strong>Key idea — the Axial Age:</strong> the "axis" period (c. 800–200 BCE) when reflective, universalizing thought emerged independently in Greece, India, China and Persia; story becomes the software that runs on the hardware of writing.</p>
+              <div class="tags"><span class="tag">Plato</span><span class="tag">Aristotle</span><span class="tag">Hero's Journey</span></div>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 5</span>
               <p class="sess-title">The Axial Age II</p>
-              <p class="sess-obj">Religious and philosophical systems as social technologies of empire.</p>
+              <p class="sess-obj"><b>Driving question:</b> how do belief systems function as <em>social technologies</em> that hold empires together?</p>
               <ul class="topics">
-                <li>Oracle of Delphi; Zoroastrianism and Manichaeism; the Tao</li>
-                <li>Headrick 3 — Iron, Horses, and Empires (1500 BCE – 500 CE)</li>
+                <li><b>Oracle of Delphi</b> — prophecy as an institution for managing uncertainty and legitimizing power.</li>
+                <li><b>Zoroastrianism &amp; Manichaeism</b> — dualist good-vs-evil cosmologies and their long afterlife in Western thought.</li>
+                <li><b>The Tao</b> — a non-dualist alternative; technology and "the way" of non-forcing.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> iron metallurgy and the horse let empires scale up physically; religion and philosophy supplied the shared software that made those empires governable.</p>
+              <ul class="reads"><li><b>Headrick ch. 3</b> — Iron, Horses, and Empires (1500 BCE – 500 CE): the material substrate of Axial-Age states.</li></ul>
               <div class="tags"><span class="tag read">Headrick ch.3</span></div>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 6</span>
               <p class="sess-title">Islamic Innovation</p>
-              <p class="sess-obj">Post-classical and medieval revolutions in science and craft.</p>
+              <p class="sess-obj"><b>Driving question:</b> what does Europe's "Dark Ages" narrative hide about the post-classical world's scientific and technical leadership?</p>
               <ul class="topics">
-                <li>From the pointed arch to the "Arabic" numerals; the genie and entheogenie</li>
-                <li>Magic, alchemy, and the occult</li>
-                <li>Headrick 4 — Post-Classical and Medieval Revolutions (500–1400)</li>
+                <li><b>From the pointed arch to "Arabic" numerals</b> — architecture, algebra and the zero (via India) that later made European mathematics and commerce possible.</li>
+                <li><b>The genie &amp; "entheogenie"</b> — myth, language and the role of altered states in framing knowledge.</li>
+                <li><b>Magic, alchemy &amp; the occult</b> — proto-chemistry and the porous early border between science and the esoteric.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> the medieval Islamic world was a central node of "collective learning," preserving and transforming Greek, Persian and Indian knowledge before transmitting it westward.</p>
+              <ul class="reads"><li><b>Headrick ch. 4</b> — Post-Classical and Medieval Revolutions (500–1400): the global, not just European, story of innovation.</li></ul>
               <div class="tags"><span class="tag read">Headrick ch.4</span></div>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 7</span>
               <p class="sess-title">The Renaissance(s)</p>
-              <p class="sess-obj">The rebirth of invention and the engineer-artist.</p>
+              <p class="sess-obj"><b>Driving question:</b> why "Renaissance<em>s</em>" (plural), and what fused the artist with the engineer?</p>
               <ul class="topics">
-                <li>Brunelleschi; Machiavelli; Da Vinci</li>
+                <li><b>Brunelleschi</b> — the dome of Florence as a feat of engineering, perspective and lost-then-rediscovered technique.</li>
+                <li><b>Machiavelli</b> — politics treated as an empirical, almost technical, discipline of power.</li>
+                <li><b>Leonardo da Vinci</b> — the paradigmatic engineer-artist whose notebooks blur invention, anatomy and art.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> the Renaissance reframes the maker as a creative inventor rather than an anonymous craftsman — the cultural seed of the modern "innovator."</p>
+              <div class="tags"><span class="tag">Brunelleschi</span><span class="tag">Machiavelli</span><span class="tag">Da Vinci</span></div>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 8</span>
               <p class="sess-title">What It Means to Be Modern</p>
-              <p class="sess-obj">Defining modernity through its critics; adds the Economic Development lens.</p>
+              <p class="sess-obj"><b>Driving question:</b> is "modernity" progress, disenchantment, or a dangerous myth? (First session to add the <em>Economic Development</em> lens.)</p>
               <ul class="topics">
-                <li>Max Weber, John Gray, and what it means to be modern</li>
+                <li><b>Max Weber</b> — rationalization, bureaucracy, the "disenchantment of the world" and the iron cage.</li>
+                <li><b>John Gray</b> — the sceptic's counter-argument that faith in progress is itself a secular religion.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> "modern" is a contested value-claim, not a neutral date — and the belief in inevitable progress is one of modernity's most powerful, and questionable, inventions.</p>
               <div class="tags"><span class="tag">Max Weber</span><span class="tag">John Gray</span></div>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 9</span>
               <p class="sess-title">Mass Conquest: Gunpowder &amp; Colonial Power</p>
-              <p class="sess-obj">How military and biological technologies enabled global conquest and extraction.</p>
+              <p class="sess-obj"><b>Driving question:</b> how did a handful of technologies — gunpowder, ships, and pathogens — let small European states conquer and partition the globe?</p>
               <ul class="topics">
-                <li>The modernity meme and the age of -isms; Vladan Joler, <em>Calculating Empires: A Genealogy of Technology and Power Since 1500</em></li>
-                <li>Columbian Exchange / extraction</li>
-                <li>Headrick 5 — An Age of Global Interactions (1300–1800)</li>
+                <li><b>The modernity meme &amp; the age of -isms</b> — capitalism, colonialism, nationalism as bundled ideologies of expansion.</li>
+                <li><b>Vladan Joler, <em>Calculating Empires</em></b> — a genealogy mapping technology and power since 1500; the visual logic behind this site's idea map.</li>
+                <li><b>The Columbian Exchange / extraction</b> — biology as conquest: crops, silver and disease reshaping continents.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> "guns, germs and ships" turned local technical advantages into planetary, and deeply unequal, power — the dark side of innovation.</p>
+              <ul class="reads"><li><b>Headrick ch. 5</b> — An Age of Global Interactions (1300–1800): how technology globalized conquest and trade.</li></ul>
               <div class="tags"><span class="tag">Vladan Joler</span><span class="tag read">Headrick ch.5</span></div>
               <p class="xref">See demo: <a href="./index.html#ideas">idea map — in the spirit of Joler's <em>Calculating Empires</em></a></p>
             </li>
@@ -369,29 +485,38 @@
             <li class="sess">
               <span class="sess-num">SESSION 10</span>
               <p class="sess-title">The "Enlightened" Innovators I</p>
-              <p class="sess-obj">Instruments, taxonomy and the financial machinery of the Enlightenment.</p>
+              <p class="sess-obj"><b>Driving question:</b> the Enlightenment gave us instruments and classification — but in whose service, and at whose expense?</p>
               <ul class="topics">
-                <li>Telescope to the flying telescope; Giordano Bruno</li>
-                <li>Linnaeus and race; futures trading; caffeine</li>
+                <li><b>Telescope to the "flying telescope"</b> — the optical instrument that recentred the cosmos, from Galileo onward.</li>
+                <li><b>Giordano Bruno</b> — the cost of heretical ideas in an age before free inquiry.</li>
+                <li><b>Linnaeus &amp; race</b> — taxonomy as a powerful tool that also encoded racial hierarchy.</li>
+                <li><b>Futures trading &amp; caffeine</b> — financial instruments and the coffee-house culture that fuelled both science and speculation.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> Enlightenment "reason" was an instrument-driven project that produced both liberating knowledge and the classificatory machinery of empire and race.</p>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 11</span>
               <p class="sess-title">The "Enlightened" Innovators II</p>
-              <p class="sess-obj">Continuation — the Enlightenment's instruments of knowledge and power.</p>
+              <p class="sess-obj"><b>Driving question:</b> how did Enlightenment science, classification and commerce compound into a self-reinforcing engine of change?</p>
               <ul class="topics">
-                <li>Further Enlightenment science, classification, and commerce</li>
+                <li><b>Continued Enlightenment science &amp; instruments</b> — building on Session 10's telescope, taxonomy and finance toward systematic, institutionalized knowledge.</li>
+                <li><b>Knowledge as power &amp; commerce</b> — how academies, encyclopaedias and markets turned discovery into a repeatable process.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> the Enlightenment's lasting invention was not any single device but <em>method</em> — a system for producing reliable, cumulative knowledge.</p>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 12</span>
               <p class="sess-title">Industrialism — "Industrial Revolution," Environmentalism &amp; Sustainability</p>
-              <p class="sess-obj">Industrial power and its cultural and political reactions; adds Economic Development.</p>
+              <p class="sess-obj"><b>Driving question:</b> when machines began to outpace human muscle, what did we gain — and what did the Romantics and anarchists warn we were losing? (Adds <em>Economic Development</em>.)</p>
               <ul class="topics">
-                <li><em>Frankenstein</em>; anarchism; romanticism</li>
+                <li><b><em>Frankenstein</em> (Shelley)</b> — the founding myth of technology out of control and the ethics of creation.</li>
+                <li><b>Anarchism</b> — political resistance to industrial concentration of power.</li>
+                <li><b>Romanticism</b> — the cultural revolt valuing nature, emotion and the sublime against the machine — an early root of environmentalism.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> industrialism inaugurated exponential growth <em>and</em> the modern environmental conscience; <em>Frankenstein</em> remains the template for every "the future doesn't need us" anxiety to come.</p>
+              <ul class="reads"><li><b>Shelley, <em>Frankenstein</em> (excerpt)</b> — read for the creator's responsibility toward what they build.</li></ul>
               <div class="tags"><span class="tag read">Shelley · Frankenstein</span></div>
               <p class="xref">See demo: <a href="./index.html#revolutions">revolutions timeline</a> · <a href="./index.html#pop">population growth (industrial jump)</a></p>
             </li>
@@ -407,26 +532,45 @@
           </div>
           <p class="module-desc">Nationalism, Darwinism, the acceleration of change, two world wars, and the atomic,
             space and cybernetic age that seeded the digital revolution.</p>
+          <div class="outcomes">
+            <h4>By the end of Part 2 you should be able to</h4>
+            <ul>
+              <li>Explain how the nation-state, mass media and Darwinism were "innovations" that organized — and weaponized — modern identity.</li>
+              <li>Connect the two industrial revolutions (Headrick ch. 6–8) to the acceleration of technical change between 1750 and 2000.</li>
+              <li>Show how total war drove the breakthrough technologies — computing, the rocket, the bomb — that launched the digital and space ages.</li>
+              <li>Read post-war techno-culture (cybernetics, cyberpunk, the Anthropocene) and globalization through the four-part sustainability lens.</li>
+            </ul>
+          </div>
           <ol class="timeline">
 
             <li class="sess">
               <span class="sess-num">SESSION 13</span>
               <p class="sess-title">The Nation as Innovation</p>
-              <p class="sess-obj">The nation-state and mass media as a coupled invention.</p>
+              <p class="sess-obj"><b>Driving question:</b> is the "nation" a timeless community or a 19th-century technology built out of print, schooling and myth?</p>
               <ul class="topics">
-                <li>The newspaper; Ernst Renan vs. von Herder; the Grimm Brothers and the good-guy/bad-guy myth; Judah Friedlander on nations</li>
-                <li>Headrick 6 — The First Industrial Revolution (1750–1869)</li>
+                <li><b>The newspaper</b> — print capitalism manufacturing a shared "imagined community" of strangers.</li>
+                <li><b>Renan vs. von Herder</b> — the nation as a daily plebiscite (civic) versus the nation as blood-and-language essence (ethnic).</li>
+                <li><b>The Grimm Brothers &amp; the good-guy/bad-guy myth</b> — folklore collected and edited into national identity and moral binaries.</li>
+                <li><b>Judah Friedlander on nations</b> — comedic deflation of national exceptionalism.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> nationalism is an invention — a media-and-narrative technology that turns industrial-scale populations into a single "us."</p>
+              <ul class="reads"><li><b>Headrick ch. 6</b> — The First Industrial Revolution (1750–1869): the material base for mass print and the nation.</li></ul>
               <div class="tags"><span class="tag read">Headrick ch.6</span></div>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 14</span>
               <p class="sess-title">Darwinism</p>
-              <p class="sess-obj">Evolution as science and as ideology of race and imperialism.</p>
+              <p class="sess-obj"><b>Driving question:</b> how did a theory of biology get hijacked into an ideology of race, empire and "survival of the fittest"?</p>
               <ul class="topics">
-                <li><em>The Origin of Species</em> (1859); Trevor Noah on race and imperialism; the history of Japan and the Last Samurai</li>
-                <li>Headrick 7 — The Acceleration of Change (1869–1939)</li>
+                <li><b><em>The Origin of Species</em> (1859)</b> — evolution by natural selection as one of history's great conceptual innovations.</li>
+                <li><b>Trevor Noah on race &amp; imperialism</b> — how "social Darwinism" rationalized colonial hierarchy.</li>
+                <li><b>The history of Japan &amp; the Last Samurai</b> — rapid Meiji modernization as a non-Western answer to the acceleration of change.</li>
+              </ul>
+              <p class="key-idea"><strong>Key idea:</strong> a scientific idea is never released into a vacuum — Darwinism shows how a discovery can be bent to justify the power structures of its era.</p>
+              <ul class="reads">
+                <li><b>Darwin, <em>The Origin of Species</em> (1859)</b> — the primary text behind the modern life sciences.</li>
+                <li><b>Headrick ch. 7</b> — The Acceleration of Change (1869–1939): the second industrial revolution speeding up.</li>
               </ul>
               <div class="tags"><span class="tag">Darwin (1859)</span><span class="tag read">Headrick ch.7</span></div>
               <p class="xref">See demo: <a href="./index.html#accel">accelerating returns</a></p>
@@ -435,56 +579,72 @@
             <li class="sess milestone">
               <span class="sess-num">SESSION 15</span>
               <p class="sess-title">Midterm Exam <span class="ms-flag">EXAM</span></p>
-              <p class="sess-obj">Written, in-class exam covering Part 1 and early Part 2 (25% of grade).</p>
+              <p class="sess-obj"><b>Assessment (25%).</b> A written, in-class exam testing understanding of the topics and slides from Part 1 and the opening of Part 2.</p>
               <ul class="topics">
-                <li>Format discussed in class; tests understanding of topics and slides</li>
+                <li><b>Format</b> discussed in class beforehand; the hand-written journal is your built-in revision tool.</li>
+                <li><b>Scope</b> — deep history through nationalism and Darwinism (Sessions 1–14).</li>
               </ul>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 16</span>
               <p class="sess-title">Innovation on the Eve of the 20th Century I</p>
-              <p class="sess-obj">The chemical, medical and material revolutions of the late 19th century.</p>
+              <p class="sess-obj"><b>Driving question:</b> which chemical, medical and material breakthroughs of the late 1800s quietly set the stage for both modern life and total war?</p>
               <ul class="topics">
-                <li>The tabloid newspaper; distillation and cocaine; Freud, dreams, Jung &amp; Nietzsche</li>
-                <li>Germ theory and vaccines; Arts and Crafts movement; oil; steel</li>
+                <li><b>The tabloid newspaper</b> — sensational mass media and the birth of the attention economy.</li>
+                <li><b>Distillation &amp; cocaine</b> — industrial chemistry applied to (and marketed as) medicine.</li>
+                <li><b>Freud, dreams, Jung &amp; Nietzsche</b> — the unconscious and the "death of God" as innovations in the science of the self.</li>
+                <li><b>Germ theory &amp; vaccines; Arts and Crafts; oil; steel</b> — the medical revolution, a craft revolt against the machine, and the two materials that built the 20th century.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> the decades before 1914 bundled extraordinary medical and material progress with the very capacities (oil, steel, chemistry) that would make industrialized killing possible.</p>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 17</span>
               <p class="sess-title">Innovation on the Eve of the 20th Century II</p>
-              <p class="sess-obj">Continuation — the technologies that set the stage for total war.</p>
+              <p class="sess-obj"><b>Driving question:</b> how did this dense cluster of innovation accelerate into the unstable, hyper-modern world of 1914?</p>
               <ul class="topics">
-                <li>Further late-19th/early-20th-century industrial and cultural innovation</li>
+                <li><b>Continued late-19th / early-20th-century innovation</b> — extending Session 16's chemistry, medicine, oil and steel into the cultural and political ferment of the era.</li>
+                <li><b>Toward total war</b> — how industrial capacity and nationalist fervour combined into a powder keg.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> the "long fin de siècle" shows acceleration as a double edge — the same forces that promised utopia delivered the first industrialized catastrophe.</p>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 18</span>
               <p class="sess-title">World War One I</p>
-              <p class="sess-obj">Industrialized warfare and its signature technologies.</p>
+              <p class="sess-obj"><b>Driving question:</b> what happens when 19th-century industrial productivity is turned entirely toward killing?</p>
               <ul class="topics">
-                <li>Chemical weapons; the tank</li>
+                <li><b>Chemical weapons</b> — industrial chemistry weaponized; gas as a symbol of technology's moral collapse.</li>
+                <li><b>The tank</b> — mechanized mobility breaking the deadlock of trench warfare.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> WWI is the first fully industrialized war — the assembly line of mass production becoming the assembly line of mass death.</p>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 19</span>
               <p class="sess-title">World War One II</p>
-              <p class="sess-obj">Continuation — the aftermath and total mobilization of technology.</p>
+              <p class="sess-obj"><b>Driving question:</b> how did total mobilization of technology reshape society, gender and the state long after the armistice?</p>
               <ul class="topics">
-                <li>Further WWI technologies and their social consequences</li>
+                <li><b>Further WWI technologies &amp; their consequences</b> — aircraft, mass logistics and propaganda extending Session 18.</li>
+                <li><b>Social fallout</b> — women in the wartime workforce, the trauma of mechanized war, and the disillusionment that fed the inter-war years.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> war is a brutal accelerator — it compresses decades of technical and social change into a few years.</p>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 20</span>
               <p class="sess-title">Inter-War Period</p>
-              <p class="sess-obj">Machines, manifestos and the birth of modern branding.</p>
+              <p class="sess-obj"><b>Driving question:</b> between the wars, how did machines, manifestos and marketing reimagine what a human being is — and wants?</p>
               <ul class="topics">
-                <li>The robot; the Futurist Manifesto; advertising, brands and logos</li>
-                <li>Headrick 8 — Toward a Post-Industrial World (1939–2000)</li>
+                <li><b>The robot</b> — from Čapek's coined word onward, the machine that might replace (or become) us.</li>
+                <li><b>The Futurist Manifesto</b> — an avant-garde worship of speed, the machine and even war.</li>
+                <li><b>Advertising, brands &amp; logos</b> — the engineering of desire and the birth of the modern brand.</li>
+              </ul>
+              <p class="key-idea"><strong>Key idea:</strong> the inter-war years invent the 20th-century self — part automated worker, part branded consumer — a direct ancestor of today's data-shaped identity.</p>
+              <ul class="reads">
+                <li><b>Harari, <em>Homo Deus</em>, ch. 11 (pp. 533–541 &amp; 558–565)</b> — read on dataism and the future of meaning and consumer identity.</li>
+                <li><b>Headrick ch. 8</b> — Toward a Post-Industrial World (1939–2000): the transition this session sets up.</li>
               </ul>
               <div class="tags"><span class="tag read">Harari · Homo Deus, ch.11 (pp. 533–541, 558–565)</span><span class="tag read">Headrick ch.8</span></div>
             </li>
@@ -492,42 +652,52 @@
             <li class="sess">
               <span class="sess-num">SESSION 21</span>
               <p class="sess-title">World War Two</p>
-              <p class="sess-obj">The war that built the computer, the rocket and the bomb.</p>
+              <p class="sess-obj"><b>Driving question:</b> how did the deadliest war in history also become the birthplace of the computer, the rocket and the atomic age?</p>
               <ul class="topics">
-                <li>Airpower; the rocket; Turing; the atom bomb; "Deaths from World War Two"</li>
+                <li><b>Airpower &amp; the rocket</b> — strategic bombing and the V-2 that pointed straight to spaceflight.</li>
+                <li><b>Turing</b> — codebreaking, the universal machine and the conceptual birth of the computer and AI.</li>
+                <li><b>The atom bomb &amp; "Deaths from World War Two"</b> — the ultimate dual-use technology and a sober accounting of its human cost.</li>
               </ul>
-              <div class="tags"><span class="tag">Turing</span></div>
+              <p class="key-idea"><strong>Key idea:</strong> WWII is the hinge of the course — the computer, the rocket and the bomb together open the digital, space and existential-risk eras to follow.</p>
+              <div class="tags"><span class="tag">Turing</span><span class="tag">atom bomb</span></div>
               <p class="xref">See demo: <a href="./index.html#ideas">idea map (computing lineage)</a></p>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 22</span>
               <p class="sess-title">The Atomic &amp; Space Age and the Anthropocene I</p>
-              <p class="sess-obj">Post-war technoculture, cybernetics and the dawn of cyberspace.</p>
+              <p class="sess-obj"><b>Driving question:</b> in the shadow of the bomb, how did post-war culture invent cyberspace, the cyborg and the idea of the Anthropocene?</p>
               <ul class="topics">
-                <li>Nuclear weapons; DARPA; Dalí and drugs; space, deGrasse Tyson and the satellite; fast food</li>
-                <li>Huxley vs. Orwell (<em>Doors of Perception</em>); The Doors vs. Hendrix; cybernetics and the cybernetic organism</li>
-                <li>Cyberpunk and William Gibson — cyberspace, "consensual hallucination"; MTV; Weird Science / War Games; the Unabomber</li>
+                <li><b>Nuclear weapons, DARPA &amp; the satellite</b> — Cold-War R&amp;D (with deGrasse Tyson on space) that seeded the internet and GPS.</li>
+                <li><b>Dalí, drugs, fast food &amp; MTV</b> — consumer technoculture, surrealism and the commodification of experience.</li>
+                <li><b>Huxley vs. Orwell &amp; <em>The Doors of Perception</em></b> — two rival dystopias (pleasure vs. boot) and the chemistry of consciousness; The Doors vs. Hendrix.</li>
+                <li><b>Cybernetics, the cyborg &amp; William Gibson</b> — feedback systems, the cybernetic organism, and cyberspace as a "consensual hallucination"; <em>Weird Science</em>, <em>WarGames</em> and the Unabomber as the tech anxiety's dark twin.</li>
               </ul>
-              <div class="tags"><span class="tag read">Huxley · Doors of Perception</span><span class="tag">Gibson · cyberspace</span></div>
+              <p class="key-idea"><strong>Key idea:</strong> the Anthropocene names the moment humans become a geological force — and cybernetics supplies the language (feedback, system, cyborg) for the digital age about to begin.</p>
+              <ul class="reads"><li><b>Huxley, <em>The Doors of Perception</em></b> — read alongside Orwell's 1946 essay for two opposite visions of how technology controls the mind.</li></ul>
+              <div class="tags"><span class="tag read">Huxley · Doors of Perception</span><span class="tag">Gibson · cyberspace</span><span class="tag">cybernetics</span></div>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 23</span>
               <p class="sess-title">The Atomic &amp; Space Age and the Anthropocene II</p>
-              <p class="sess-obj">Continuation — the cultural fallout of the atomic and cybernetic age.</p>
+              <p class="sess-obj"><b>Driving question:</b> what is the cultural and ecological fallout of an age that can both reach the moon and end itself?</p>
               <ul class="topics">
-                <li>Further atomic/space-age technologies and the Anthropocene</li>
+                <li><b>Continued atomic / space-age technologies</b> — extending Session 22 into the deeper Anthropocene.</li>
+                <li><b>Planetary consciousness</b> — how nuclear and space imagery (foreshadowing Earthrise in Session 30) reframed humanity's view of itself.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> the same era that gave us the means of self-destruction also gave us the first whole-Earth perspective — the seed of modern environmental and existential ethics.</p>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 24</span>
               <p class="sess-title">Globalism</p>
-              <p class="sess-obj">Globalization and its discontents at the close of the 20th century.</p>
+              <p class="sess-obj"><b>Driving question:</b> at the end of the 20th century, is the world being knit together by markets or torn apart by identity — or both at once?</p>
               <ul class="topics">
-                <li>Barber's <em>Jihad vs. McWorld</em></li>
+                <li><b>Barber's <em>Jihad vs. McWorld</em></b> — the simultaneous pull of homogenizing global consumerism ("McWorld") and reactive tribal-religious identity ("Jihad").</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> globalization is dialectical — the very technologies that integrate the planet also provoke the backlash that fragments it, setting up the digital era's culture wars.</p>
+              <ul class="reads"><li><b>Barber, <em>Jihad vs. McWorld</em></b> — read for the twin, opposing forces shaping a networked world.</li></ul>
               <div class="tags"><span class="tag read">Barber · Jihad vs McWorld</span></div>
             </li>
           </ol>
@@ -542,16 +712,28 @@
           </div>
           <p class="module-desc">The Fourth Industrial Revolution, hyperreality, the AI cyborg and transhumanism — and
             the ethics of where the innovation is leading.</p>
+          <div class="outcomes">
+            <h4>By the end of Part 3 you should be able to</h4>
+            <ul>
+              <li>Characterize the Fourth Industrial Revolution and explain how platforms, data and algorithms reshape politics, attention and the self.</li>
+              <li>Use Baudrillard's <em>hyperreality</em> and Carr's <em>The Shallows</em> to analyze how digital media change what we perceive and how we think.</li>
+              <li>Critically assess transhumanism and the "singularity" — Kurzweil, Tegmark and Davis — as both engineering forecast and quasi-religious narrative.</li>
+              <li>Articulate a reasoned ethical position on super-intelligence, a-mortality and human enhancement, grounded in the course's humanities lens.</li>
+            </ul>
+          </div>
           <ol class="timeline">
 
             <li class="sess">
               <span class="sess-num">SESSION 25</span>
               <p class="sess-title">Digitalism I</p>
-              <p class="sess-obj">The Fourth Industrial Revolution and the politics of platforms.</p>
+              <p class="sess-obj"><b>Driving question:</b> in a world of platforms, is "reality" still where decisions are made — or has the map replaced the territory?</p>
               <ul class="topics">
-                <li>The Fourth Industrial Revolution; "These Systems are Failing Me"; hyperreality (Baudrillard); Ursula Le Guin; the meme</li>
-                <li>"The Future Doesn't Need Us"; the drone; Facebook and its foreign policy; Harari, Google and ISIS</li>
+                <li><b>The Fourth Industrial Revolution &amp; "These Systems Are Failing Me"</b> — the fusion of digital, physical and biological systems, and the lived experience of its breakdowns.</li>
+                <li><b>Hyperreality (Baudrillard) &amp; the meme</b> — simulations with no original; the meme as the native unit of networked culture; Ursula K. Le Guin on imagining alternatives.</li>
+                <li><b>"The Future Doesn't Need Us," the drone, Facebook's foreign policy, Harari–Google–ISIS</b> — autonomous weapons and platforms as quasi-sovereign geopolitical actors.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea — hyperreality:</strong> when signs refer only to other signs, the simulation becomes more "real" than the real; platforms govern by shaping the simulated world we act inside.</p>
+              <ul class="reads"><li><b>Harari, <em>Nexus</em></b> — read for information networks as the deep history (and danger) of human and machine power.</li></ul>
               <div class="tags"><span class="tag">Baudrillard · hyperreality</span><span class="tag read">Harari · Nexus</span></div>
               <p class="xref">See demo: <a href="./index.html#scurve">diffusion S-curves</a> · <a href="./index.html#learning">collective learning</a></p>
             </li>
@@ -559,19 +741,30 @@
             <li class="sess">
               <span class="sess-num">SESSION 26</span>
               <p class="sess-title">Digitalism II</p>
-              <p class="sess-obj">Continuation — the social and cognitive impact of the digital age.</p>
+              <p class="sess-obj"><b>Driving question:</b> what is the internet doing to our brains, attention and capacity for deep thought?</p>
               <ul class="topics">
-                <li>Further digital-era platforms, networks and their effects</li>
+                <li><b>Networks, social media &amp; cognition</b> — extending Session 25 into the personal and neural effects of always-on connectivity.</li>
+                <li><b>The shallows of distraction</b> — how a medium optimized for interruption reshapes memory and concentration.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> echoing McLuhan from Session 3, the digital medium rewires its users — the "second brain" of search and feed comes at a measurable cognitive cost.</p>
+              <ul class="reads"><li><b>Carr, <em>The Shallows</em></b> — read for the argument that the net trades depth for breadth and trains us toward distraction.</li></ul>
               <div class="tags"><span class="tag read">Carr · The Shallows</span></div>
             </li>
 
             <li class="sess">
               <span class="sess-num">SESSION 27</span>
               <p class="sess-title">InnovAItion I</p>
-              <p class="sess-obj">AI, the cyborg and the merger of the technological with the spiritual.</p>
+              <p class="sess-obj"><b>Driving question:</b> as AI and biotech merge us with our machines, is technology becoming our new religion — and could super-intelligence be "the final invention"?</p>
               <ul class="topics">
-                <li>The AI cyborg; the divine digital, "fAIth"; transhumanism</li>
+                <li><b>The AI cyborg</b> — human–machine merger and brain–computer interfaces as the next "human extension."</li>
+                <li><b>The divine digital, "fAIth"</b> — Erik Davis on the spiritual and mystical impulses coded into digital culture.</li>
+                <li><b>Transhumanism</b> — Kurzweil's accelerating returns and the singularity; Tegmark's "Life 3.0" that designs its own hardware and software.</li>
+              </ul>
+              <p class="key-idea"><strong>Key idea — the singularity:</strong> if intelligence can recursively improve itself, change goes vertical — the hopeful and terrifying core of the transhumanist promise.</p>
+              <ul class="reads">
+                <li><b>Davis, <em>Techgnosis</em></b> — read for technology as a vessel for ancient mystical and gnostic longings.</li>
+                <li><b>Tegmark, <em>Life 3.0</em></b> — read for a structured taxonomy of AI futures and the alignment problem.</li>
+                <li><b>Kurzweil (accelerating returns)</b> — read for the exponential, "law of accelerating returns" case for the singularity.</li>
               </ul>
               <div class="tags"><span class="tag read">Davis · Techgnosis</span><span class="tag read">Tegmark · Life 3.0</span><span class="tag read">Kurzweil</span></div>
               <p class="xref">See demo: <a href="./index.html#accel">accelerating returns</a> · <a href="./index.html#ideas">idea map → AI</a></p>
@@ -580,71 +773,219 @@
             <li class="sess">
               <span class="sess-num">SESSION 28</span>
               <p class="sess-title">InnovAItion II</p>
-              <p class="sess-obj">AI's role in society, education and the mind.</p>
+              <p class="sess-obj"><b>Driving question:</b> if AI can do the knowing for us, what is education — and the human mind — still for?</p>
               <ul class="topics">
-                <li>The role of education in the age of AI vs. AI's role in education; AI and dreams; John Oliver video</li>
+                <li><b>Education in the age of AI vs. AI's role in education</b> — should we learn <em>with</em> AI, learn to outthink it, or both? (The course's own GenAI policy in practice.)</li>
+                <li><b>AI and dreams; John Oliver on AI</b> — generative models, creativity and a critical popular take on AI's hype and harms.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> in a world of cheap answers, the scarce, defensibly human skills become judgement, framing and ethics — exactly what the course's hand-written, cross-checked method cultivates.</p>
             </li>
 
             <li class="sess milestone">
               <span class="sess-num">SESSION 29</span>
               <p class="sess-title">Final Exam <span class="ms-flag">EXAM</span></p>
-              <p class="sess-obj">Comprehensive written, in-class exam covering all aspects of the course (25%; min. 3.5).</p>
+              <p class="sess-obj"><b>Assessment (25%; minimum grade 3.5).</b> A comprehensive written, in-class exam covering <em>all</em> aspects of the course.</p>
               <ul class="topics">
-                <li>Format discussed in class; includes all aspects of the course</li>
+                <li><b>Format</b> discussed in class; synthesizes the deep-history, modern-era and digital-future arcs.</li>
+                <li><b>Stakes</b> — scoring below 3.5 sends you to the re-sit regardless of your overall grade.</li>
               </ul>
             </li>
 
             <li class="sess milestone">
               <span class="sess-num">SESSION 30</span>
               <p class="sess-title">Conclusion: Earthrise &amp; The Pale Blue Dot</p>
-              <p class="sess-obj">A closing reflection on planetary perspective and the ethics of the coming age.</p>
+              <p class="sess-obj"><b>Driving question:</b> standing at the edge of super-intelligence and a-mortality, what kind of future do we actually want — and who decides?</p>
               <ul class="topics">
-                <li>Earthrise and the Pale Blue Dot; where innovation and disruption are leading</li>
+                <li><b>Earthrise &amp; the Pale Blue Dot</b> — the two images (Apollo 8; Voyager 1, via Carl Sagan) that turned the whole-Earth perspective into an ethic of humility and stewardship.</li>
+                <li><b>Where innovation and disruption are leading</b> — a closing synthesis weighing the promise of human cyborgs and super-human races against their costs.</li>
               </ul>
+              <p class="key-idea"><strong>Key idea:</strong> the course closes by zooming all the way out — from the first stone tool to the pale blue dot — to insist that the ethics of innovation matter as much as the innovation itself.</p>
             </li>
           </ol>
         </div>
       </section>
 
+      <!-- GLOSSARY -->
+      <section class="demo" id="glossary">
+        <h2>Key concepts — a glossary</h2>
+        <p class="cap">The recurring ideas that thread through the three parts. Use these as anchors when revising and when
+          writing the journal, midterm and op-ed.</p>
+        <dl class="glossary">
+          <div>
+            <dt>Big History</dt>
+            <dd>The attempt to tell one continuous story from the deep past to the present (and future), here organized around innovation and its consequences.</dd>
+          </div>
+          <div>
+            <dt>Technology as human extension</dt>
+            <dd>McLuhan's idea that tools and media extend our bodies and senses — and, in doing so, reshape how we perceive and organize society.</dd>
+          </div>
+          <div>
+            <dt>"The medium is the message"</dt>
+            <dd>McLuhan's claim that a medium's form (print, TV, the feed) affects us more than any particular content it carries.</dd>
+          </div>
+          <div>
+            <dt>Collective learning</dt>
+            <dd>The cumulative, shared storage and transmission of knowledge across generations — the engine that lets human capability compound over time.</dd>
+          </div>
+          <div>
+            <dt>Hydraulic civilization</dt>
+            <dd>An early state organized around large-scale irrigation, whose water management demanded bureaucracy, writing and centralized power.</dd>
+          </div>
+          <div>
+            <dt>The Axial Age</dt>
+            <dd>The pivotal era (c. 800–200 BCE) when reflective philosophical and religious systems arose independently across Eurasia.</dd>
+          </div>
+          <div>
+            <dt>Story as technology</dt>
+            <dd>Narrative (myth, tragedy, the Hero's Journey) treated as a portable cognitive tool for transmitting values and coordinating groups.</dd>
+          </div>
+          <div>
+            <dt>Modernity</dt>
+            <dd>A contested condition marked by rationalization, industry and the belief in progress — celebrated by Weber's analysis, doubted by John Gray.</dd>
+          </div>
+          <div>
+            <dt>Disenchantment</dt>
+            <dd>Weber's term for modernity's draining of magic and mystery from the world as science and bureaucracy expand.</dd>
+          </div>
+          <div>
+            <dt>Risk society</dt>
+            <dd>Ulrich Beck's thesis that advanced modernity systematically manufactures its own hazards ("bads") that cross class and national borders.</dd>
+          </div>
+          <div>
+            <dt>The Columbian Exchange</dt>
+            <dd>The transfer of crops, animals, people and diseases between hemispheres after 1492 — biology as a tool of conquest and extraction.</dd>
+          </div>
+          <div>
+            <dt>Social Darwinism</dt>
+            <dd>The misapplication of "survival of the fittest" to societies, used to justify racial hierarchy and imperialism.</dd>
+          </div>
+          <div>
+            <dt>Imagined community</dt>
+            <dd>The nation understood as a constructed sense of belonging among strangers, built largely through print and mass media.</dd>
+          </div>
+          <div>
+            <dt>Dual-use technology</dt>
+            <dd>Innovation that serves both civilian and military ends — e.g. chemistry, the rocket, nuclear physics and AI.</dd>
+          </div>
+          <div>
+            <dt>Cybernetics</dt>
+            <dd>The science of control and feedback in machines and organisms; the conceptual root of the "cyborg" and of information theory.</dd>
+          </div>
+          <div>
+            <dt>Cyberspace</dt>
+            <dd>Gibson's "consensual hallucination" — the shared, immersive informational space we now inhabit as much as physical space.</dd>
+          </div>
+          <div>
+            <dt>The Anthropocene</dt>
+            <dd>The proposed geological epoch in which human activity is the dominant force shaping the planet's systems.</dd>
+          </div>
+          <div>
+            <dt>Fourth Industrial Revolution</dt>
+            <dd>The current fusion of digital, physical and biological systems — AI, robotics, biotech and ubiquitous data.</dd>
+          </div>
+          <div>
+            <dt>Hyperreality</dt>
+            <dd>Baudrillard's condition in which simulations detached from any original become more "real" to us than reality itself.</dd>
+          </div>
+          <div>
+            <dt>The "second brain"</dt>
+            <dd>The offloading of memory and reasoning onto search engines, the cloud and now AI — augmenting us while reshaping our cognition.</dd>
+          </div>
+          <div>
+            <dt>Accelerating returns</dt>
+            <dd>Kurzweil's claim that the rate of technological change grows exponentially, compounding upon itself.</dd>
+          </div>
+          <div>
+            <dt>The Singularity</dt>
+            <dd>A hypothesized point where self-improving machine intelligence triggers runaway, near-vertical change.</dd>
+          </div>
+          <div>
+            <dt>Transhumanism</dt>
+            <dd>The movement to use technology to transcend human biological limits — toward enhanced, merged or a-mortal beings.</dd>
+          </div>
+          <div>
+            <dt>A-mortality</dt>
+            <dd>Indefinite lifespan through medical and cybernetic advances — not immortality, but the removal of death-by-ageing.</dd>
+          </div>
+          <div>
+            <dt>The "final invention"</dt>
+            <dd>The idea that a super-intelligence may be the last thing humans need to invent, since it could invent everything after.</dd>
+          </div>
+          <div>
+            <dt>Sustainability lens</dt>
+            <dd>The course's analytic frame — Environment, Governance, Social Challenge and (later) Economic Development — applied to every innovation.</dd>
+          </div>
+          <div>
+            <dt>The Overview Effect</dt>
+            <dd>The shift in perspective (Earthrise, the Pale Blue Dot) on seeing Earth whole — a planetary ethic of fragility and stewardship.</dd>
+          </div>
+        </dl>
+      </section>
+
       <!-- BIBLIOGRAPHY -->
       <section class="demo" id="biblio">
         <h2>Bibliography &amp; key readings</h2>
-        <p class="cap">One textbook anchors the course; all other readings are provided digitally. Recommended and
-          additional works extend the themes from Sapiens to super-intelligence.</p>
+        <p class="cap">One textbook anchors the course; all other readings are provided digitally. Each entry below carries a
+          one-line annotation and the sessions where it is used.</p>
 
         <div class="split">
           <div>
             <h3>Compulsory</h3>
             <ul class="biblio">
-              <li>Daniel R. Headrick — <em>Technology: A World History</em>, 1st ed., Oxford. ISBN 0195338219 <span class="pill">textbook</span></li>
+              <li>Daniel R. Headrick — <em>Technology: A World History</em>, 1st ed., Oxford. ISBN 0195338219 <span class="pill">textbook</span>
+                <span class="anno">The spine of the course: a global, chapter-by-chapter survey of technology from stone tools to the post-industrial world. <span class="where">Ch. 1–2 → S3 · ch. 3 → S5 · ch. 4 → S6 · ch. 5 → S9 · ch. 6 → S13 · ch. 7 → S14 · ch. 8 → S20</span></span></li>
             </ul>
             <h3 style="margin-top:1rem;">Recommended</h3>
             <ul class="biblio">
-              <li>Yuval N. Harari — <em>Sapiens: A Brief History of Humankind</em>. ISBN 9780062316110</li>
-              <li>Yuval N. Harari — <em>Homo Deus: A Brief History of Tomorrow</em>. ISBN 1910701882</li>
-              <li>Max Tegmark — <em>Life 3.0: Being Human in the Age of Artificial Intelligence</em>. ISBN 1101946598</li>
-              <li>Walter Isaacson — <em>The Innovators</em> (2015), Simon &amp; Schuster. ISBN 9781471138805</li>
-              <li>Andrew F. Krepinevich — <em>The Origins of Victory</em>. ISBN 9780300280098</li>
-              <li>McClellan &amp; Dorn — <em>Science and Technology in World History</em>, 3rd ed. ISBN 9781421417752</li>
-              <li>Dodgson &amp; Gann — <em>Innovation</em>, 2nd ed., Oxford. ISBN 0198825048</li>
+              <li>Yuval N. Harari — <em>Sapiens: A Brief History of Humankind</em>. ISBN 9780062316110
+                <span class="anno">Big-history framing of how Homo sapiens conquered the planet via shared fictions. <span class="where">Background to Parts 1–2</span></span></li>
+              <li>Yuval N. Harari — <em>Homo Deus: A Brief History of Tomorrow</em>. ISBN 1910701882
+                <span class="anno">On dataism and the future of meaning and consumer identity. <span class="where">Ch. 11, pp. 533–541 &amp; 558–565 → S20</span></span></li>
+              <li>Max Tegmark — <em>Life 3.0: Being Human in the Age of AI</em>. ISBN 1101946598
+                <span class="anno">A taxonomy of AI futures and the alignment problem. <span class="where">S27 (InnovAItion I)</span></span></li>
+              <li>Walter Isaacson — <em>The Innovators</em> (2015), Simon &amp; Schuster. ISBN 9781471138805
+                <span class="anno">How collaboration built the digital revolution — Turing to the web. <span class="where">S21, S25–S26</span></span></li>
+              <li>Andrew F. Krepinevich — <em>The Origins of Victory</em>. ISBN 9780300280098
+                <span class="anno">How disruptive military innovation decides the fate of nations. <span class="where">S18–S21 (the world wars)</span></span></li>
+              <li>McClellan &amp; Dorn — <em>Science and Technology in World History</em>, 3rd ed. ISBN 9781421417752
+                <span class="anno">A complementary survey pairing science with technology across cultures. <span class="where">Parts 1–2</span></span></li>
+              <li>Dodgson &amp; Gann — <em>Innovation</em>, 2nd ed., Oxford. ISBN 0198825048
+                <span class="anno">A concise theory of how innovation actually happens — useful for the op-ed. <span class="where">Block work · Part 3</span></span></li>
             </ul>
           </div>
           <div>
             <h3>Digital excerpts &amp; theorists</h3>
             <ul class="biblio">
-              <li><em>Gilgamesh</em></li>
-              <li>Aldous Huxley — <em>The Doors of Perception</em></li>
-              <li>Marshall McLuhan — <em>The Medium is the Message</em></li>
-              <li>David Foster Wallace — <em>This is Water</em></li>
-              <li>Nicholas Carr — <em>The Shallows</em></li>
-              <li>Erik Davis — <em>Techgnosis</em></li>
-              <li>Ulrich Grober — <em>A Cultural History of Sustainability</em></li>
-              <li>Michael Pollan — <em>How to Change Your Mind</em></li>
-              <li>Yuval N. Harari — <em>Nexus</em></li>
+              <li><em>Gilgamesh</em>
+                <span class="anno">The oldest epic, read as a sustainability and mortality parable. <span class="where">S3</span></span></li>
+              <li>Marshall McLuhan — <em>The Medium is the Message</em>
+                <span class="anno">Media as extensions of the human sensorium; form over content. <span class="where">S3 (echoed S26)</span></span></li>
+              <li>Aldous Huxley — <em>The Doors of Perception</em>
+                <span class="anno">Consciousness, perception and the chemistry of the mind; paired with Orwell. <span class="where">S22</span></span></li>
+              <li>George Orwell — 1946 essay (with Huxley)
+                <span class="anno">The boot-on-the-face dystopia against Huxley's pleasure-dystopia. <span class="where">S22</span></span></li>
+              <li>David Foster Wallace — <em>This is Water</em>
+                <span class="anno">On attention, default settings and choosing what to think — a counterweight to distraction. <span class="where">S2, S26</span></span></li>
+              <li>Nicholas Carr — <em>The Shallows</em>
+                <span class="anno">How the internet trades cognitive depth for breadth. <span class="where">S26</span></span></li>
+              <li>Erik Davis — <em>Techgnosis</em>
+                <span class="anno">Technology as a vessel for ancient mystical and gnostic longings. <span class="where">S27</span></span></li>
+              <li>Ulrich Grober — <em>A Cultural History of Sustainability</em>
+                <span class="anno">The deep roots of the sustainability idea — supports the course's lens. <span class="where">S12, S22–S23, S30</span></span></li>
+              <li>Michael Pollan — <em>How to Change Your Mind</em>
+                <span class="anno">The science and history of psychedelics and consciousness. <span class="where">S4, S22</span></span></li>
+              <li>Yuval N. Harari — <em>Nexus</em>
+                <span class="anno">Information networks as the deep history — and danger — of power. <span class="where">S25</span></span></li>
+              <li>Vladan Joler — <em>Calculating Empires</em>
+                <span class="anno">A visual genealogy of technology and power since 1500; inspiration for the idea map. <span class="where">S9</span></span></li>
+              <li>Mary Shelley — <em>Frankenstein</em>
+                <span class="anno">The founding myth of creation and responsibility for what we build. <span class="where">S12</span></span></li>
+              <li>Benjamin Barber — <em>Jihad vs. McWorld</em>
+                <span class="anno">The twin forces of global consumerism and tribal reaction. <span class="where">S24</span></span></li>
             </ul>
-            <p class="frame-note" style="margin-top:0.8rem;">Featured theorists across the course: McLuhan, Baudrillard,
-              Kurzweil, Tegmark, Erik Davis, John Gray and Ulrich Beck — from ChatGPT and SpaceX to transhumanism.</p>
+            <p class="frame-note" style="margin-top:0.8rem;">Theorists named across the course: McLuhan, Baudrillard,
+              Kurzweil, Tegmark, Erik Davis, John Gray and Ulrich Beck — from ChatGPT and SpaceX to transhumanism. Course
+              policies (behaviour, attendance, ethics) follow IE University's published codes.</p>
           </div>
         </div>
       </section>
