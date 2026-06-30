@@ -149,6 +149,54 @@
       .outcomes ul { margin: 0; padding-left: 1.05rem; }
       .outcomes li { color: var(--ink-soft); font-size: 0.8rem; margin-bottom: 0.2rem; }
 
+      /* deep dives — the big mechanisms */
+      .dd-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+        gap: 1rem; margin-top: 0.6rem;
+      }
+      .dd {
+        border: 1px solid var(--rule); border-radius: 8px; background: var(--bg);
+        padding: 0.85rem 1rem 0.95rem; display: flex; flex-direction: column;
+      }
+      .dd-head { display: flex; align-items: baseline; gap: 0.55rem; margin-bottom: 0.35rem; }
+      .dd-no {
+        font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+        color: #fff; background: var(--accent); padding: 0.1em 0.5em; border-radius: 999px; flex: none;
+      }
+      .dd h3 { font-size: 0.95rem; font-weight: 800; margin: 0; letter-spacing: -0.01em; color: var(--ink); }
+      .dd p { color: var(--ink-soft); font-size: 0.83rem; line-height: 1.6; margin: 0 0 0.5rem; }
+      .dd p:last-of-type { margin-bottom: 0; }
+      .dd p b { color: var(--ink); font-weight: 600; }
+      .dd .takeaway {
+        margin-top: 0.55rem; padding: 0.4rem 0.7rem;
+        border-left: 3px solid var(--accent); background: var(--accent-soft);
+        border-radius: 0 6px 6px 0; font-size: 0.78rem; color: var(--ink-soft);
+      }
+      .dd .takeaway strong { color: var(--accent); font-weight: 700; }
+      /* the eight thresholds — ordered list of one-liners */
+      .thresholds { list-style: none; margin: 0.3rem 0 0; padding: 0; counter-reset: thr; }
+      .thresholds li {
+        position: relative; padding: 0.4rem 0 0.4rem 2.4rem;
+        border-top: 1px solid var(--rule); font-size: 0.83rem; color: var(--ink-soft); line-height: 1.5;
+      }
+      .thresholds li:first-child { border-top: 0; }
+      .thresholds li::before {
+        counter-increment: thr; content: counter(thr);
+        position: absolute; left: 0; top: 0.45rem;
+        width: 1.6rem; height: 1.6rem; line-height: 1.6rem; text-align: center;
+        font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600;
+        color: var(--accent); border: 1.5px solid var(--accent); border-radius: 999px;
+      }
+      .thresholds li b { color: var(--ink); font-weight: 700; }
+      .thresholds li .gz { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+      .dd.span2 { grid-column: 1 / -1; }
+      /* cosmic calendar mini-table */
+      .cosmic { width: 100%; border-collapse: collapse; margin-top: 0.4rem; font-size: 0.8rem; }
+      .cosmic th, .cosmic td { text-align: left; padding: 0.28rem 0.5rem; border-bottom: 1px solid var(--rule); }
+      .cosmic th { color: var(--muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; font-weight: 700; }
+      .cosmic td:first-child { font-family: var(--font-mono); color: var(--accent); white-space: nowrap; }
+      .cosmic td b { color: var(--ink); font-weight: 600; }
+
       /* glossary */
       .glossary {
         display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -171,6 +219,7 @@
         <a href="#objectives">objectives</a>
         <a href="#assessment">methodology</a>
         <a href="#program">program</a>
+        <a href="#deepdive">deep dives</a>
         <a href="#glossary">glossary</a>
         <a href="#biblio">bibliography</a>
         <a href="./SYLLABUS.pdf" target="_blank">syllabus PDF</a>
@@ -804,6 +853,149 @@
               <p class="key-idea"><strong>Key idea:</strong> the course closes by zooming all the way out — from the first stone tool to the pale blue dot — to insist that the ethics of innovation matter as much as the innovation itself.</p>
             </li>
           </ol>
+        </div>
+      </section>
+
+      <!-- DEEP DIVES -->
+      <section class="demo" id="deepdive">
+        <h2>Deep dives — the big mechanisms</h2>
+        <p class="cap">The session list above is the <em>itinerary</em>; these panels are the <em>engine room</em>. Each one
+          explains a through-line that recurs across the whole course — the mechanisms (and the dates and figures) behind
+          why complexity, energy use and the pace of change have climbed together. The "eight thresholds" and "collective
+          learning" framings come from <b>David Christian's Big History</b>; the rest are standard accounts drawn together
+          to read the syllabus as one continuous story.</p>
+
+        <div class="dd-grid">
+
+          <!-- 1 · Eight thresholds -->
+          <div class="dd span2">
+            <div class="dd-head"><span class="dd-no">01</span><h3>The eight thresholds of increasing complexity</h3></div>
+            <p>David Christian's Big History organizes 13.8 billion years as a ladder of <b>eight "thresholds"</b> — moments
+              when something genuinely new and more complex appears. Each jump only happens under precise <b>"Goldilocks
+              conditions"</b>: a narrow band — not too hot, not too cold, the right ingredients, the right energy flow — that
+              makes the new arrangement possible. Complexity here means more diverse components held in more specific
+              relationships, which is fragile and needs a steady flow of energy to sustain.</p>
+            <ol class="thresholds">
+              <li><b>The Big Bang</b> — the origin of space, time, matter and energy <span class="gz">(c. 13.8 billion years ago)</span>. <span class="gz">Goldilocks: the universe's fundamental constants.</span></li>
+              <li><b>The first stars</b> — gravity pulls hydrogen and helium into stars that ignite and light the cosmos <span class="gz">(from ~13.5 bya)</span>. <span class="gz">Goldilocks: slight density variations + gravity.</span></li>
+              <li><b>New chemical elements</b> — heavier elements (carbon, oxygen, iron) are forged inside large stars and scattered when they die as supernovae. <span class="gz">Goldilocks: dying massive stars.</span></li>
+              <li><b>Planets and the solar system</b> — those new elements let rocky planets, including Earth, form <span class="gz">(c. 4.5 bya)</span>. <span class="gz">Goldilocks: a stable star + diverse elements.</span></li>
+              <li><b>Life</b> — chemistry becomes biology; self-replicating, evolving organisms appear on Earth <span class="gz">(c. 3.8 bya)</span>. <span class="gz">Goldilocks: liquid water + energy gradients.</span></li>
+              <li><b>Humans &amp; collective learning</b> — <em>Homo sapiens</em> arrives with language able to store and share information across generations <span class="gz">(c. 200,000 years ago)</span>. <span class="gz">Goldilocks: a brain + symbolic language.</span></li>
+              <li><b>Agriculture</b> — farming concentrates energy and people, enabling surplus, cities and states <span class="gz">(c. 10,000 BCE)</span>. <span class="gz">Goldilocks: a warm, stable Holocene climate.</span></li>
+              <li><b>The modern revolution</b> — fossil fuels, global networks and science drive an explosion of complexity and population <span class="gz">(c. 1800 →)</span>. <span class="gz">Goldilocks: a dense, connected, energy-rich world.</span></li>
+            </ol>
+            <p class="takeaway"><strong>Through-line:</strong> the story is not steady progress but a series of rare, conditional leaps — each threshold builds on the last, and each demands a richer flow of energy to hold its new order together.</p>
+          </div>
+
+          <!-- 2 · Collective learning -->
+          <div class="dd">
+            <div class="dd-head"><span class="dd-no">02</span><h3>Collective learning — the human engine</h3></div>
+            <p>Many animals learn, but the knowledge dies with the individual. Humans, uniquely, use <b>symbolic
+              language</b> to share information so precisely that it accumulates across generations faster than it is
+              lost — David Christian calls this <b>collective learning</b>. It is the reason human history accelerates
+              while other species stay roughly the same.</p>
+            <p>Each new information technology widens the channel and speeds the flow: <b>speech</b>, then <b>writing</b>
+              (c. 3200 BCE), the <b>printing press</b> (c. 1440), and today the <b>internet</b>. Bigger, denser, better-
+              connected populations exchange more ideas, so innovation compounds — the same logic that links Threshold 6
+              to the modern revolution.</p>
+            <p class="takeaway"><strong>Through-line:</strong> ideas, not genes, are humanity's fast-evolving inheritance — connectivity is the multiplier behind every later acceleration.</p>
+          </div>
+
+          <!-- 3 · Energy & complexity -->
+          <div class="dd">
+            <div class="dd-head"><span class="dd-no">03</span><h3>Energy &amp; complexity — the hidden currency</h3></div>
+            <p>Complex things — stars, cells, cities — are improbable arrangements that constantly tend to fall apart, so
+              they survive only by channelling a continuous <b>flow of energy</b>. Across Big History, every major leap in
+              complexity is paired with the harnessing of a <b>new energy source</b>.</p>
+            <p>Humans tamed <b>fire</b> (controlled use by ~400,000 years ago) to cook and pre-digest food; <b>agriculture</b>
+              captured the sun's energy through crops and domestic animals; and the <b>fossil-fuel</b> era (coal, then oil
+              and gas, from c. 1800) unlocked stored sunlight from hundreds of millions of years of buried carbon. Energy
+              use per person has risen with each stage, which is exactly why the modern revolution is also a climate story.</p>
+            <p class="takeaway"><strong>Through-line:</strong> rising complexity requires rising energy throughput — progress and its environmental cost are two readings of the same curve.</p>
+          </div>
+
+          <!-- 4 · Agricultural Revolution -->
+          <div class="dd">
+            <div class="dd-head"><span class="dd-no">04</span><h3>The Agricultural Revolution</h3></div>
+            <p>Beginning around <b>c. 10,000 BCE</b>, as the last Ice Age ended and the climate stabilized, people in
+              several <b>independent centres</b> — the Fertile Crescent (wheat, barley), China (rice, millet), Mesoamerica
+              (maize), the Andes (potato) and New Guinea — domesticated plants and animals. Farming yields far more food
+              per acre than foraging, producing a <b>surplus</b> that, over millennia, made possible cities, states,
+              writing, taxation and social hierarchy.</p>
+            <p>But the trade-offs were severe: early farmers were often <b>shorter and less healthy</b> than foragers,
+              worked longer hours, and lived crowded among animals — the source of zoonotic <b>epidemic diseases</b>.
+              Surplus also enabled <b>inequality</b> and patriarchy. Jared Diamond provocatively called agriculture the
+              <b>"worst mistake in the history of the human race,"</b> a debate that reframes a triumph as a bargain.</p>
+            <p class="takeaway"><strong>Through-line:</strong> this is Threshold 7 in close-up — the deal that traded health and equality for surplus, scale and the state.</p>
+          </div>
+
+          <!-- 5 · Industrial Revolution -->
+          <div class="dd">
+            <div class="dd-head"><span class="dd-no">05</span><h3>The Industrial Revolution</h3></div>
+            <p>From roughly <b>1760–1840</b>, Britain became the first society to break the "Malthusian" ceiling on growth.
+              Why Britain first? A convergence of <b>cheap, accessible coal</b>, capital and credit from commerce and empire,
+              wide <b>markets</b>, high wages that rewarded labour-saving machines, and a culture of useful tinkering. The
+              decisive technology was the improved <b>steam engine</b> (James Watt, patent 1769), which converted coal into
+              motion independent of muscle, wind or water.</p>
+            <p>The consequences were global: mechanized factories, railways and steamships, mass urbanization, and the
+              <b>demographic transition</b> in which death rates fall first and birth rates only later, driving rapid
+              population growth. It also locked in fossil-fuel dependence and vast new inequalities between industrializing
+              and colonized regions.</p>
+            <p class="takeaway"><strong>Through-line:</strong> the opening move of the modern revolution (Threshold 8) — the moment energy, not muscle, began to set the pace of history.</p>
+          </div>
+
+          <!-- 6 · Information / Digital Revolution -->
+          <div class="dd">
+            <div class="dd-head"><span class="dd-no">06</span><h3>The Information &amp; Digital Revolution</h3></div>
+            <p>The second great modern acceleration runs on information rather than steam. It begins with the <b>transistor</b>
+              (Bardeen, Brattain and Shockley at Bell Labs, <b>1947</b>), a tiny switch that replaced bulky vacuum tubes.
+              Packing transistors onto silicon chips produced <b>Moore's law</b> — Gordon Moore's 1965 observation that the
+              number of transistors on a chip roughly doubles about every two years, an exponential that held for decades.</p>
+            <p>Cheap computing plus the <b>internet</b> (ARPANET, 1969) and the <b>World Wide Web</b> (Tim Berners-Lee,
+              1989–91) turned the planet into one network, and recent <b>AI</b> rides the same curve. <b>Transhumanism</b>
+              is the claim that this trajectory will let us transcend human biological limits — merging with our machines,
+              extending lifespan, perhaps designing our successors.</p>
+            <p class="takeaway"><strong>Through-line:</strong> the same exponential logic as collective learning, now running at the speed of silicon — the curve the course's final sessions extrapolate.</p>
+          </div>
+
+          <!-- 7 · Cosmic Calendar -->
+          <div class="dd span2">
+            <div class="dd-head"><span class="dd-no">07</span><h3>The Cosmic Calendar — how late we arrive</h3></div>
+            <p>Carl Sagan's <b>Cosmic Calendar</b> compresses all <b>13.8 billion years</b> into a single calendar year to
+              make the scale graspable. On that scale roughly <b>438 years equal one second</b>, and the entirety of
+              recorded human history fits into the <b>last few seconds of 31 December</b>. The lesson is sobering: humans
+              are not the centre of the story but its newest, briefest chapter.</p>
+            <table class="cosmic">
+              <thead><tr><th>Cosmic date</th><th>Event</th><th>Actual time ago</th></tr></thead>
+              <tbody>
+                <tr><td>Jan 1</td><td><b>Big Bang</b> — the universe begins</td><td>c. 13.8 billion yrs</td></tr>
+                <tr><td>~Jan / Feb</td><td>First stars and galaxies form</td><td>c. 13.5–13.2 billion yrs</td></tr>
+                <tr><td>~Aug 31 / Sep 1</td><td><b>Earth and the solar system</b> form</td><td>c. 4.5 billion yrs</td></tr>
+                <tr><td>~Sep</td><td>First <b>life</b> on Earth</td><td>c. 3.8 billion yrs</td></tr>
+                <tr><td>Dec 30</td><td>Dinosaurs go extinct</td><td>c. 66 million yrs</td></tr>
+                <tr><td>Dec 31, ~22:24</td><td><b>Homo sapiens</b> appears</td><td>c. 200,000 yrs</td></tr>
+                <tr><td>Dec 31, 23:59:32</td><td><b>Agriculture</b> begins</td><td>c. 12,000 yrs</td></tr>
+                <tr><td>Dec 31, 23:59:59</td><td>The <b>modern / industrial</b> era; all written history</td><td>last few thousand yrs</td></tr>
+              </tbody>
+            </table>
+            <p class="takeaway"><strong>Through-line:</strong> every threshold from agriculture onward — the whole syllabus — happens in the final minute, which is why the modern revolution feels so vertiginously fast.</p>
+          </div>
+
+          <!-- 8 · Columbian Exchange / globalization -->
+          <div class="dd">
+            <div class="dd-head"><span class="dd-no">08</span><h3>Globalization as a connectivity threshold</h3></div>
+            <p>After <b>1492</b>, Columbus's voyages reconnected hemispheres that had evolved apart for millennia, triggering
+              the <b>Columbian Exchange</b> — a two-way transfer of crops, animals, people and pathogens. Old-World diseases
+              such as <b>smallpox</b> devastated Indigenous American populations (mortality estimates often run as high as
+              ~90% in the worst-hit regions), while New-World crops like the <b>potato and maize</b> later fuelled population
+              growth across Eurasia and Africa.</p>
+            <p>In collective-learning terms this was a sudden, massive <b>increase in connectivity</b>: ideas, technologies,
+              silver and labour (including the Atlantic slave trade) began circulating worldwide for the first time —
+              integrating the planet into a single, deeply unequal system that set the stage for the industrial era.</p>
+            <p class="takeaway"><strong>Through-line:</strong> connectivity is itself an accelerant — linking the world's information networks multiplied the pace of change, for better and far worse.</p>
+          </div>
+
         </div>
       </section>
 
