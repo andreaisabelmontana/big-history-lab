@@ -197,6 +197,91 @@
       .cosmic td:first-child { font-family: var(--font-mono); color: var(--accent); white-space: nowrap; }
       .cosmic td b { color: var(--ink); font-weight: 600; }
 
+      /* how we know — quantitative reasoning toolkit */
+      .hwk-intro-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 0.7rem; margin: 0.7rem 0 0.2rem;
+      }
+      .hwk-fact {
+        border: 1px solid var(--rule); border-radius: 6px; background: var(--bg);
+        padding: 0.5rem 0.7rem;
+      }
+      .hwk-fact span { display: block; color: var(--muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; }
+      .hwk-fact strong { color: var(--ink); font-weight: 700; font-size: 0.9rem; }
+      .hwk-fact em { display: block; color: var(--ink-soft); font-size: 0.74rem; font-style: normal; margin-top: 0.1rem; }
+
+      .hwk-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 1rem; margin-top: 0.7rem;
+      }
+      .hwk {
+        border: 1px solid var(--rule); border-radius: 8px; background: var(--bg);
+        padding: 0.85rem 1rem 0.95rem; display: flex; flex-direction: column;
+      }
+      .hwk.span2 { grid-column: 1 / -1; }
+      .hwk-head { display: flex; align-items: baseline; gap: 0.55rem; margin-bottom: 0.4rem; }
+      .hwk-no {
+        font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+        color: var(--accent); border: 1.5px solid var(--accent);
+        padding: 0.05em 0.5em; border-radius: 999px; flex: none;
+      }
+      .hwk h3 { font-size: 0.95rem; font-weight: 800; margin: 0; letter-spacing: -0.01em; color: var(--ink); }
+      .hwk > p { color: var(--ink-soft); font-size: 0.83rem; line-height: 1.6; margin: 0 0 0.55rem; }
+      .hwk > p b { color: var(--ink); font-weight: 600; }
+      /* the "statement" prompt */
+      .hwk-q {
+        font-size: 0.82rem; color: var(--ink); line-height: 1.55;
+        padding: 0.45rem 0.7rem; margin: 0 0 0.55rem;
+        background: var(--paper); border: 1px solid var(--rule); border-radius: 6px;
+      }
+      .hwk-q b { color: var(--accent); font-weight: 700; }
+      /* step-by-step working — monospace lines */
+      .work { list-style: none; margin: 0 0 0.55rem; padding: 0; }
+      .work li {
+        font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-soft);
+        line-height: 1.7; padding: 0.05rem 0; border-bottom: 1px dotted var(--rule);
+      }
+      .work li:last-child { border-bottom: 0; }
+      .work li .note {
+        font-family: var(--font-sans); color: var(--muted); font-size: 0.72rem; margin-left: 0.4rem;
+      }
+      .work li b { color: var(--ink); font-weight: 600; }
+      /* boxed answer */
+      .boxed {
+        margin-top: 0.2rem; padding: 0.45rem 0.75rem;
+        border: 1.5px solid var(--accent); border-radius: 7px;
+        background: var(--accent-soft); font-size: 0.84rem; color: var(--ink);
+      }
+      .boxed strong { color: var(--accent); font-weight: 800; }
+      .boxed .ans { font-family: var(--font-mono); font-weight: 600; }
+      /* evidence / how-we-know explainer */
+      .evid {
+        margin-top: 0.55rem; padding: 0.4rem 0.7rem;
+        border-left: 3px solid var(--rule-h); background: var(--paper);
+        border-radius: 0 6px 6px 0; font-size: 0.78rem; color: var(--ink-soft); line-height: 1.55;
+      }
+      .evid strong { color: var(--ink); font-weight: 700; }
+      /* inline plain-text formula (no KaTeX on this page) */
+      .fml { font-family: var(--font-mono); font-size: 0.92em; color: var(--accent-deep); background: var(--accent-soft); padding: 0.02em 0.3em; border-radius: 4px; white-space: nowrap; }
+      /* scale ladder + chaisson tables reuse .cosmic look */
+      .ladder, .chai { width: 100%; border-collapse: collapse; margin-top: 0.4rem; font-size: 0.79rem; }
+      .ladder th, .ladder td, .chai th, .chai td { text-align: left; padding: 0.26rem 0.5rem; border-bottom: 1px solid var(--rule); }
+      .ladder th, .chai th { color: var(--muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.03em; font-weight: 700; }
+      .ladder td:first-child, .chai td:last-child { font-family: var(--font-mono); color: var(--accent); white-space: nowrap; }
+      .ladder td b, .chai td b { color: var(--ink); font-weight: 600; }
+      .chai td:last-child { text-align: right; }
+      /* common misconceptions */
+      .misc { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+      .misc li {
+        padding: 0.5rem 0.7rem 0.55rem; border: 1px solid var(--rule);
+        border-radius: 6px; background: var(--bg); font-size: 0.8rem; line-height: 1.55; color: var(--ink-soft);
+      }
+      .misc li .myth { display: block; color: var(--bad); font-weight: 600; margin-bottom: 0.1rem; }
+      .misc li .myth::before { content: '✗ '; font-family: var(--font-mono); }
+      .misc li .fix { display: block; }
+      .misc li .fix::before { content: '✓ '; color: var(--good); font-family: var(--font-mono); font-weight: 700; }
+      .misc li .fix b { color: var(--ink); font-weight: 600; }
+
       /* glossary */
       .glossary {
         display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -220,6 +305,7 @@
         <a href="#assessment">methodology</a>
         <a href="#program">program</a>
         <a href="#deepdive">deep dives</a>
+        <a href="#howweknow">how we know</a>
         <a href="#glossary">glossary</a>
         <a href="#biblio">bibliography</a>
         <a href="./SYLLABUS.pdf" target="_blank">syllabus PDF</a>
@@ -997,6 +1083,256 @@
           </div>
 
         </div>
+      </section>
+
+      <!-- HOW WE KNOW — QUANTITATIVE REASONING -->
+      <section class="demo" id="howweknow">
+        <h2>How we know — scales, dating &amp; worked reasoning</h2>
+        <p class="cap">Big History is a humanities course, but its biggest claims — "13.8 billion years," "humans arrive in
+          the last minute," "change is accelerating" — rest on a small toolkit of <em>quantitative reasoning</em>. This
+          section is the <em>"how we know"</em> behind the story: each panel takes a statement, works the arithmetic step
+          by step to a boxed answer, then explains the kind of evidence the number comes from. Every figure below is a
+          well-established estimate; where only a range is known, a range is given. There is no math library on this page,
+          so formulas are written in plain notation.</p>
+
+        <div class="hwk-intro-grid">
+          <div class="hwk-fact"><span>Universe</span><strong>13.8 billion yr</strong><em>cosmic microwave background</em></div>
+          <div class="hwk-fact"><span>Earth</span><strong>4.6 billion yr</strong><em>uranium–lead dating of meteorites</em></div>
+          <div class="hwk-fact"><span>First life</span><strong>~3.7 billion yr</strong><em>oldest microfossils / chemistry</em></div>
+          <div class="hwk-fact"><span>Homo sapiens</span><strong>~300,000 yr</strong><em>Jebel Irhoud &amp; later fossils</em></div>
+          <div class="hwk-fact"><span>C-14 half-life</span><strong>5,730 yr</strong><em>radiocarbon clock (≤ ~50 kyr)</em></div>
+          <div class="hwk-fact"><span>U-238 half-life</span><strong>4.47 billion yr</strong><em>deep-time clock</em></div>
+        </div>
+
+        <div class="hwk-grid">
+
+          <!-- 1 · Cosmic Calendar conversions -->
+          <div class="hwk span2">
+            <div class="hwk-head"><span class="hwk-no">01</span><h3>The Cosmic Calendar — deriving the conversion</h3></div>
+            <p>Carl Sagan's device (used throughout David Christian's Big History) compresses the whole <b>13.8-billion-year</b>
+              history of the universe into a single <b>365-day</b> year so the scale becomes graspable. Everything starts
+              from one division.</p>
+            <p class="hwk-q"><b>Statement.</b> If 13.8 billion years map onto 365 days, how much real time is one calendar
+              day, hour, minute and second — and where do the big events and "all of recorded history" land?</p>
+            <ul class="work">
+              <li>1 day &nbsp;= 13.8×10⁹ yr ÷ 365 = <b>37,808,219 yr</b> <span class="note">≈ 37.8 million yr / day</span></li>
+              <li>1 hour = 37,808,219 ÷ 24 = <b>1,575,342 yr</b> <span class="note">≈ 1.575 million yr / hour</span></li>
+              <li>1 min &nbsp;= 1,575,342 ÷ 60 = <b>26,256 yr</b> <span class="note">≈ 26,250 yr / minute</span></li>
+              <li>1 sec &nbsp;= 26,256 ÷ 60 = <b>437.6 yr</b> <span class="note">≈ 438 yr / second</span></li>
+            </ul>
+            <p class="hwk-q" style="margin-top:0.2rem;"><b>Placing events</b> (real time ago ÷ rate above):</p>
+            <ul class="work">
+              <li>Earth, 4.6×10⁹ yr &nbsp;÷ 37.8e6/day = 122 days before Dec 31 → <b>≈ Sep 1</b></li>
+              <li>First life, 3.7×10⁹ yr ÷ 37.8e6/day = 98 days before → <b>≈ late Sep</b></li>
+              <li>Homo sapiens, 300,000 yr ÷ 26,256/min = <b>11.4 min before midnight, Dec 31</b></li>
+              <li>Recorded history, ~5,000 yr ÷ 437.6/sec = <b>≈ the last 11 seconds</b></li>
+            </ul>
+            <div class="boxed"><strong>Answer.</strong> 1 day <span class="ans">≈ 37.8 Myr</span>, 1 hr <span class="ans">≈ 1.58 Myr</span>,
+              1 min <span class="ans">≈ 26,250 yr</span>, 1 sec <span class="ans">≈ 437.5 yr</span>. The Big Bang is Jan 1; Earth forms
+              in early September; <em>Homo sapiens</em> appears only in the last ~11 minutes of Dec 31, and all written history is the
+              final ~11 seconds.</div>
+            <p class="evid"><strong>How we know &amp; a caveat.</strong> The 13.8-Gyr figure comes from the cosmic microwave
+              background (the afterglow of the Big Bang) measured by the Planck satellite. Sagan's original 1980 calendar used
+              older numbers — a ~15-Gyr universe and a later date for our genus — and famously put humanity in "the last 30
+              minutes" or recorded history in "the last 21 seconds." Recompute with today's <b>13.8 Gyr</b> and <b>~300,000-yr</b>
+              <em>Homo sapiens</em> and you get the ~11-minute / ~11-second figures above. The qualitative lesson is unchanged: we
+              are astonishingly late. (If you instead date the human story from our genus <em>Homo</em>, ~2.5 Myr, that is the last
+              ~1.6 hours — still a sliver.)</p>
+          </div>
+
+          <!-- 2 · Powers of ten -->
+          <div class="hwk">
+            <div class="hwk-head"><span class="hwk-no">02</span><h3>Powers of ten — the scale ladder</h3></div>
+            <p>Big History spans the very small to the very large, so it is told in <b>orders of magnitude</b> (powers of ten).
+              Each rung is <b>10× the one below</b>; counting the gap between two rungs gives the ratio in one number.</p>
+            <p class="hwk-q"><b>Statement.</b> How many orders of magnitude separate an atom from the observable universe?</p>
+            <ul class="work">
+              <li>atom radius &nbsp;≈ 10⁻¹⁰ m</li>
+              <li>universe &nbsp;≈ 10²⁶ m <span class="note">(radius)</span></li>
+              <li>ratio = 10²⁶ ÷ 10⁻¹⁰ = 10^(26−(−10)) = <b>10³⁶</b></li>
+            </ul>
+            <div class="boxed"><strong>Answer.</strong> About <span class="ans">36 orders of magnitude</span> — a 1 followed by 36 zeros.</div>
+            <table class="ladder">
+              <thead><tr><th>Object</th><th>Size (m)</th></tr></thead>
+              <tbody>
+                <tr><td>Atom</td><td>10⁻¹⁰</td></tr>
+                <tr><td>Virus</td><td>10⁻⁷</td></tr>
+                <tr><td>Human</td><td>10⁰</td></tr>
+                <tr><td>Earth</td><td>10⁷</td></tr>
+                <tr><td>Solar System</td><td>10¹³</td></tr>
+                <tr><td>Milky Way</td><td>10²¹</td></tr>
+                <tr><td>Observable universe</td><td>10²⁶</td></tr>
+              </tbody>
+            </table>
+            <p class="evid"><strong>Why it matters.</strong> On a linear scale these would be invisible next to one another;
+              powers of ten are the only honest way to hold "atom" and "universe" on the same page.</p>
+          </div>
+
+          <!-- 3 · Rule of 70 / doubling time -->
+          <div class="hwk">
+            <div class="hwk-head"><span class="hwk-no">03</span><h3>Exponential growth &amp; the rule of 70</h3></div>
+            <p>"Accelerating returns" means a quantity grows by a <b>percentage</b> each year, so it <em>doubles</em> at regular
+              intervals. The shortcut: <span class="fml">doubling time ≈ 70 ÷ (% growth per year)</span> — because 100·ln 2 ≈ 69.3.</p>
+            <p class="hwk-q"><b>Statement.</b> A population grows 2% per year. How long until it doubles — and what does 1% vs 3% give?</p>
+            <ul class="work">
+              <li>2% / yr → 70 ÷ 2 = <b>35 yr</b> <span class="note">(exact: 35.0 yr)</span></li>
+              <li>1% / yr → 70 ÷ 1 = <b>70 yr</b></li>
+              <li>3% / yr → 70 ÷ 3 = <b>≈ 23 yr</b></li>
+            </ul>
+            <div class="boxed"><strong>Answer.</strong> At 2%/yr a population doubles in <span class="ans">≈ 35 years</span>;
+              halving the rate doubles the time, raising it shrinks it sharply.</div>
+            <p class="evid"><strong>Big-History payoff.</strong> World population took ~1800 years to double from ~0.3 to ~0.6
+              billion, but only ~45 years (1927→1974) to double from 2 to 4 billion — the growth <em>rate</em> itself rose, which
+              is what "the modern revolution" looks like in numbers.</p>
+          </div>
+
+          <!-- 4 · Radiometric dating (C-14) -->
+          <div class="hwk">
+            <div class="hwk-head"><span class="hwk-no">04</span><h3>Radiocarbon dating — counting half-lives</h3></div>
+            <p>A radioactive isotope decays so that a fixed <em>fraction</em> is left after each <b>half-life</b> <i>T</i>:
+              <span class="fml">N = N₀ · (½)^(t / T)</span>. For carbon-14, <i>T</i> = <b>5,730 yr</b>.</p>
+            <p class="hwk-q"><b>Statement.</b> A bone has ¼ of its original C-14 left. How old is it?</p>
+            <ul class="work">
+              <li>¼ = (½)² → <b>2 half-lives</b> have passed</li>
+              <li>t = 2 × 5,730 = <b>11,460 yr</b></li>
+              <li>check: after 1 T → ½, after 2 T → ¼ ✓</li>
+            </ul>
+            <div class="boxed"><strong>Answer.</strong> The bone is <span class="ans">≈ 11,460 years</span> old.</div>
+            <p class="evid"><strong>Range &amp; limits.</strong> After ~10 half-lives almost no C-14 remains, so radiocarbon
+              works only to <b>~50,000 yr</b> — perfect for the human/agricultural story but not for deep time. Older samples need
+              longer-lived clocks (see panel 05).</p>
+          </div>
+
+          <!-- 5 · Deep-time dating (U-238) -->
+          <div class="hwk">
+            <div class="hwk-head"><span class="hwk-no">05</span><h3>Dating the Earth — the deep-time clock</h3></div>
+            <p>The same decay law dates the planet, but with an isotope slow enough to survive billions of years: <b>uranium-238</b>
+              decays to lead-206 with a half-life of <b>4.47 billion yr</b>.</p>
+            <p class="hwk-q"><b>Statement.</b> Why can U-238 date Earth (~4.6 Gyr) when C-14 cannot?</p>
+            <ul class="work">
+              <li>Earth ≈ 4.6×10⁹ yr ≈ <b>~1 U-238 half-life</b></li>
+              <li>same age in C-14: 4.6e9 ÷ 5,730 ≈ <b>800,000 half-lives</b></li>
+              <li>(½)^800000 ≈ 0 → no C-14 detectable</li>
+            </ul>
+            <div class="boxed"><strong>Answer.</strong> A clock must tick on the timescale you measure: U-238 has ticked
+              <span class="ans">~once</span> over Earth's life; C-14 would have ticked itself to nothing.</div>
+            <p class="evid"><strong>How we know Earth's age.</strong> The ~<b>4.6-Gyr</b> figure comes from uranium–lead dating of
+              the oldest meteorites (Clair Patterson, 1956), which formed with the Solar System — Earth's own oldest rocks were
+              recycled by plate tectonics, so we read the planet's birthday off its siblings.</p>
+          </div>
+
+          <!-- 6 · Looking back in time -->
+          <div class="hwk">
+            <div class="hwk-head"><span class="hwk-no">06</span><h3>Looking back in time — light as a time machine</h3></div>
+            <p>Light travels at a finite speed, so a distance of one <b>light-year</b> means the light we see left its source
+              <b>one year ago</b>. To see far is to see the past.</p>
+            <p class="hwk-q"><b>Statement.</b> How "old" is the light we see from the Sun, and from the Andromeda galaxy?</p>
+            <ul class="work">
+              <li>Sun: distance 1 AU → light takes <b>≈ 8.3 minutes</b></li>
+              <li>Andromeda: ~2.5 million light-years away</li>
+              <li>→ its light left <b>≈ 2.5 million yr ago</b></li>
+            </ul>
+            <div class="boxed"><strong>Answer.</strong> We see the Sun as it was <span class="ans">~8 minutes ago</span> and
+              Andromeda as it was <span class="ans">~2.5 million years ago</span> — around when the genus <em>Homo</em> first appeared.</div>
+            <p class="evid"><strong>Why it matters.</strong> Telescopes are literally time machines: the deeper they look, the
+              earlier in cosmic history they see — which is how we observe the young universe at all.</p>
+          </div>
+
+          <!-- 7 · Energy rate density (Chaisson) -->
+          <div class="hwk span2">
+            <div class="hwk-head"><span class="hwk-no">07</span><h3>Energy rate density — measuring "complexity"</h3></div>
+            <p>If complexity is real, can it be <em>measured</em>? Astrophysicist <b>Eric Chaisson</b> proposes one yardstick:
+              <b>energy rate density</b> (symbol Φ<sub>m</sub>) — the free energy flowing through each gram of a system each second,
+              in <span class="fml">erg s⁻¹ g⁻¹</span>. More complex systems, he argues, must channel a denser flow of energy to
+              maintain their improbable order — exactly the "energy &amp; complexity" through-line in panel 03 above, now as a number.</p>
+            <p class="hwk-q"><b>Statement.</b> Order these by energy rate density: a star, a plant, an animal, a human brain, modern
+              society. What is the spread?</p>
+            <table class="chai">
+              <thead><tr><th>System</th><th>Φ<sub>m</sub> (erg s⁻¹ g⁻¹)</th></tr></thead>
+              <tbody>
+                <tr><td><b>Stars</b> (e.g. the Sun)</td><td>~2</td></tr>
+                <tr><td><b>Planets</b> (e.g. Earth)</td><td>~75</td></tr>
+                <tr><td><b>Plants</b> (photosynthesis / biosphere)</td><td>~900</td></tr>
+                <tr><td><b>Animal bodies</b> (metabolism)</td><td>~20,000</td></tr>
+                <tr><td><b>Human brains</b></td><td>~150,000</td></tr>
+                <tr><td><b>Modern society</b> (engines / culture)</td><td>~500,000</td></tr>
+              </tbody>
+            </table>
+            <ul class="work" style="margin-top:0.55rem;">
+              <li>spread = 500,000 ÷ 2 = <b>250,000×</b> from a star to modern society</li>
+              <li>brain vs body = 150,000 ÷ 20,000 ≈ <b>7–8×</b> denser</li>
+            </ul>
+            <div class="boxed"><strong>Answer.</strong> By Chaisson's metric, complexity climbs <span class="ans">~250,000-fold</span>
+              from a star to a modern technological society — and the human brain runs the densest energy flow of any natural system
+              known.</div>
+            <p class="evid"><strong>Attribution &amp; caution.</strong> These are <b>Chaisson's order-of-magnitude estimates</b>
+              (from <em>Cosmic Evolution</em>, 2001), not exact constants, and the metric is one proposal among several for quantifying
+              complexity — treat the <em>pattern</em> (a steep, monotonic rise) as the claim, not the precise digits. It gives the eight
+              thresholds a measurable spine: each major threshold roughly coincides with a jump in energy rate density.</p>
+          </div>
+
+          <!-- 8 · Thresholds + Goldilocks as conditions -->
+          <div class="hwk span2">
+            <div class="hwk-head"><span class="hwk-no">08</span><h3>The eight thresholds as conditional steps — and their "Goldilocks" conditions</h3></div>
+            <p>The quantitative panels above all point at the same shape: complexity rises in <b>rare, conditional leaps</b>, not
+              a smooth ramp. Each of David Christian's eight thresholds only fires when specific <b>"Goldilocks conditions"</b> are
+              met — a narrow window of temperature, ingredients and energy flow. Read top-to-bottom, this is the spine that the
+              dates (panel 01), the energy ladder (panel 07) and the whole syllabus hang on.</p>
+            <ol class="thresholds">
+              <li><b>Big Bang</b> — space, time, matter, energy begin. <span class="gz">Goldilocks: the fundamental constants fall in a life-permitting range.</span></li>
+              <li><b>Stars</b> — gravity ignites hydrogen. <span class="gz">Goldilocks: tiny density ripples + enough gravity to collapse gas.</span></li>
+              <li><b>Heavier elements</b> — forged in stars, scattered by supernovae. <span class="gz">Goldilocks: massive stars hot enough for fusion, then dying.</span></li>
+              <li><b>Planets / Solar System</b> — rocky worlds from those elements. <span class="gz">Goldilocks: a stable star + a disc of varied elements.</span></li>
+              <li><b>Life</b> — self-replicating, evolving chemistry. <span class="gz">Goldilocks: liquid water, energy gradients, the right molecules.</span></li>
+              <li><b>Humans &amp; collective learning</b> — symbolic language stores knowledge across generations. <span class="gz">Goldilocks: a large brain + precise shared language.</span></li>
+              <li><b>Agriculture</b> — captured solar energy yields surplus, cities, states. <span class="gz">Goldilocks: the warm, stable Holocene climate + domesticable species.</span></li>
+              <li><b>The modern revolution</b> — fossil fuels + global networks + science. <span class="gz">Goldilocks: a dense, connected, energy-rich, information-rich world.</span></li>
+            </ol>
+            <p class="evid"><strong>The pattern.</strong> Notice the conditions get <em>tighter and faster</em> down the list — and
+              they map onto rising energy rate density (panel 07) and the compressed dates of the Cosmic Calendar (panel 01). That
+              convergence is the strongest version of Big History's central claim.</p>
+          </div>
+
+        </div>
+
+        <!-- common misconceptions -->
+        <h2 style="margin-top:1.4rem;">Common misconceptions</h2>
+        <p class="cap">The quantitative claims above are easy to misread. These are the slips to watch for — in the journal,
+          the op-ed and the exams.</p>
+        <ul class="misc">
+          <li>
+            <span class="myth">"On the Cosmic Calendar, humans have been around for a few days."</span>
+            <span class="fix">All of <em>Homo sapiens</em> fits in roughly the <b>last 11 minutes</b> of December 31, and all written history in about the <b>last 11 seconds</b> — not days.</span>
+          </li>
+          <li>
+            <span class="myth">"Carbon-14 can date dinosaur bones and rocks."</span>
+            <span class="fix">C-14 is useless beyond <b>~50,000 years</b>; dinosaurs (~66 Myr) and rocks are dated with long-lived isotopes like <b>uranium-238</b>.</span>
+          </li>
+          <li>
+            <span class="myth">"After one half-life the sample is completely gone."</span>
+            <span class="fix">One half-life removes <b>half</b>, not all; two leave ¼, three leave ⅛ — decay is exponential and never quite reaches zero.</span>
+          </li>
+          <li>
+            <span class="myth">"The universe (13.8 Gyr) and the Earth (4.6 Gyr) are about the same age."</span>
+            <span class="fix">The universe is roughly <b>3× older</b> than the Earth; our planet formed only when the cosmos was already ~9 billion years old.</span>
+          </li>
+          <li>
+            <span class="myth">"Exponential and fast linear growth are basically the same thing."</span>
+            <span class="fix">Exponential growth has a constant <b>doubling time</b>, so the absolute increase keeps getting bigger — the defining feature of "accelerating returns."</span>
+          </li>
+          <li>
+            <span class="myth">"Seeing a distant galaxy shows us what it looks like now."</span>
+            <span class="fix">We see it as it was when its light <em>left</em> — Andromeda as it was ~<b>2.5 million years</b> ago. Distance is a look into the past.</span>
+          </li>
+          <li>
+            <span class="myth">"The Big Bang was an explosion that happened somewhere in space."</span>
+            <span class="fix">It was the expansion of space <em>itself</em>, everywhere at once — there is no central point and no "outside" it expanded into.</span>
+          </li>
+          <li>
+            <span class="myth">"Energy rate density proves humans are the goal of evolution."</span>
+            <span class="fix">Chaisson's metric describes a <b>trend in complexity</b>, not a purpose or destiny — and the values are order-of-magnitude estimates, not exact laws.</span>
+          </li>
+        </ul>
       </section>
 
       <!-- GLOSSARY -->
