@@ -36,6 +36,7 @@
         <a href="#complexity">complexity</a>
         <a href="#revolutions">revolutions</a>
         <a href="#learning">collective learning</a>
+        <a href="#decay">dating</a>
       </nav>
     </header>
 
@@ -233,6 +234,35 @@
               <input id="cl-l" type="range" min="0" max="60" step="1" value="10"/></label>
             <div class="readout"><span>retention</span><strong id="cl-ret" class="mono">—</strong></div>
             <div class="readout"><span>stock after 40 gens</span><strong id="cl-stock" class="mono big">—</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. RADIOMETRIC DATING — half-life decay -->
+      <section class="demo" id="decay">
+        <h2>10. Radiometric dating — half-life decay</h2>
+        <p class="cap">The clock behind "how we know" the deep past. A radioactive isotope decays so a fixed
+          fraction survives each half-life $T$: $N/N_0=\left(\tfrac{1}{2}\right)^{t/T}$. Pick an isotope and
+          drag elapsed time $t$ to watch the curve fall through ½, ¼, ⅛ … Read the fraction remaining, the
+          number of half-lives, and the <em>inverse</em> — the age implied by a measured fraction,
+          $t=T\,\log_2\!\left(N_0/N\right)$.</p>
+        <div class="row">
+          <div class="canvas-wrap"><canvas id="cv-decay" width="600" height="320"></canvas></div>
+          <div class="ctrls">
+            <label>isotope / decay system
+              <select id="dc-iso">
+                <option value="0" selected>Carbon-14 → N-14 (T = 5,730 yr)</option>
+                <option value="1">Potassium-40 → Ar-40 (T = 1.25 Gyr)</option>
+                <option value="2">Uranium-238 → Pb-206 (T = 4.47 Gyr)</option>
+              </select>
+            </label>
+            <label>elapsed time $t$ <span class="mono" id="dc-tv">—</span>
+              <input id="dc-t" type="range" min="0" max="1000" step="1" value="200"/></label>
+            <div class="readout"><span>half-lives $t/T$</span><strong id="dc-n" class="mono">—</strong></div>
+            <div class="readout"><span>fraction $N/N_0$</span><strong id="dc-frac" class="mono big">—</strong></div>
+            <div class="readout"><span>percent remaining</span><strong id="dc-pct" class="mono">—</strong></div>
+            <div class="readout"><span>implied age $T\log_2(N_0/N)$</span><strong id="dc-age" class="mono">—</strong></div>
+            <p class="hint" id="dc-range"></p>
           </div>
         </div>
       </section>

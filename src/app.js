@@ -750,3 +750,119 @@ function fmtBig(x) {
   window.addEventListener('resize', draw);
   draw();
 })();
+
+// ============================================================
+// 10. RADIOMETRIC DATING — half-life exponential decay
+// Pure math:
+//   fracRemaining(t, T) = (1/2)^(t/T)
+//   ageFromFraction(f, T) = T * log2(1/f)   (inverse of the above)
+// Verified numerically in test/decay.test.js (node --test).
+// ============================================================
+export function fracRemaining(t, T) {
+  if (!(T > 0)) return NaN;
+  return Math.pow(0.5, t / T);
+}
+export function ageFromFraction(frac, T) {
+  if (!(T > 0) || !(frac > 0)) return NaN;
+  return T * Math.log2(1 / frac);
+}
+
+(function radiometricDating() {
+  const cv = $('cv-decay'); if (!cv) return;
+  // half-life T in years; HALVES = elapsed-time range as multiples of T.
+  const ISO = [
+    { name: 'Carbon-14', daughter: 'N-14', T: 5730,
+      range: 'useful to ~50,000 yr (~9 half-lives) — wood, bone, charcoal, the Holocene & late Pleistocene.' },
+    { name: 'Potassium-40', daughter: 'Ar-40', T: 1.25e9,
+      range: 'useful for millions–billions of yr — volcanic ash, dating hominin sites and rock strata.' },
+    { name: 'Uranium-238', daughter: 'Pb-206', T: 4.47e9,
+      range: 'useful for hundreds of millions–billions of yr — dates Earth & meteorites at ~4.6 Gyr.' },
+  ];
+  const HALVES = 6;          // slider spans 0 → 6 half-lives
+  const SLIDER_MAX = 1000;
+  function sliderToHalves(s) { return clamp(s, 0, SLIDER_MAX) / SLIDER_MAX * HALVES; }
+
+  function draw() {
+    const { ctx, w, h } = fitCanvas(cv);
+    ctx.clearRect(0, 0, w, h);
+    const ii = clamp(Math.round(n('dc-iso', 0)), 0, ISO.length - 1);
+    const iso = ISO[ii];
+    const T = iso.T;
+    const halves = sliderToHalves(n('dc-t', 200));   // t / T
+    const t = halves * T;                             // elapsed time in years
+    const frac = fracRemaining(t, T);
+
+    const L = 46, R = w - 18, Tp = 22, B = h - 36;
+    const xOf = nh => L + (R - L) * clamp(nh / HALVES, 0, 1);   // nh = number of half-lives
+    const yOf = f => B - (B - Tp) * clamp(f, 0, 1);             // fraction 0..1
+
+    // axes
+    ctx.strokeStyle = RULE; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(L, Tp); ctx.lineTo(L, B); ctx.lineTo(R, B); ctx.stroke();
+    // y ticks: fraction
+    ctx.fillStyle = MUTED; ctx.font = '10px JetBrains Mono, monospace'; ctx.textAlign = 'right';
+    [0, 0.25, 0.5, 0.75, 1].forEach(f => {
+      const y = yOf(f);
+      ctx.strokeStyle = RULE; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(L, y); ctx.lineTo(R, y); ctx.stroke();
+      ctx.fillStyle = MUTED; ctx.fillText(f.toFixed(2), L - 4, y + 3);
+    });
+    // x ticks: half-lives
+    ctx.textAlign = 'center';
+    for (let k = 0; k <= HALVES; k++) {
+      const x = xOf(k);
+      ctx.fillStyle = MUTED; ctx.fillText(k + 'T', x, B + 18);
+    }
+    ctx.fillText('elapsed time (in half-lives T)', (L + R) / 2, B + 30);
+
+    // decay curve
+    ctx.strokeStyle = ACCENT; ctx.lineWidth = 2.4; ctx.beginPath();
+    for (let px = 0; px <= R - L; px++) {
+      const nh = px / (R - L) * HALVES;
+      const y = yOf(Math.pow(0.5, nh));
+      if (px === 0) ctx.moveTo(L + px, y); else ctx.lineTo(L + px, y);
+    }
+    ctx.stroke();
+
+    // successive half-life markers: (1, 1/2), (2, 1/4), (3, 1/8) ...
+    const labels = ['1', '½', '¼', '⅛', '1⁄16', '1⁄32', '1⁄64'];
+    for (let k = 1; k <= HALVES; k++) {
+      const f = Math.pow(0.5, k);
+      const x = xOf(k), y = yOf(f);
+      ctx.strokeStyle = RULE_H; ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, B); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(L, y); ctx.lineTo(x, y); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#fff'; ctx.strokeStyle = RULE_H; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = MUTED; ctx.font = '9px JetBrains Mono, monospace'; ctx.textAlign = 'left';
+      ctx.fillText(labels[k] || '', x + 6, y - 4);
+    }
+
+    // current (t, fraction) point
+    const cx = xOf(halves), cy = yOf(frac);
+    ctx.strokeStyle = ACCENT; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(cx, B); ctx.lineTo(cx, cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(L, cy); ctx.lineTo(cx, cy); ctx.stroke();
+    ctx.fillStyle = ACCENT; ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.textAlign = 'left';
+
+    // title in-canvas
+    ctx.fillStyle = INK_S; ctx.font = '600 11px Inter, sans-serif';
+    ctx.fillText(`${iso.name} → ${iso.daughter}   T = ${fmtYears(T)}`.replace(' ya', ''), L + 8, Tp + 12);
+
+    // readouts
+    setText('dc-tv', fmtYears(t).replace(' ya', '') + ' (' + halves.toFixed(2) + 'T)');
+    setText('dc-n', halves.toFixed(2));
+    setText('dc-frac', frac.toFixed(4));
+    setText('dc-pct', (frac * 100).toFixed(2) + '%');
+    // implied age from the current fraction — the inverse; equals t by construction
+    const age = ageFromFraction(frac, T);
+    setText('dc-age', Number.isFinite(age) ? fmtYears(age).replace(' ya', '') : '—');
+    setText('dc-range', iso.name + ': ' + iso.range);
+  }
+  $('dc-t').addEventListener('input', draw);
+  $('dc-iso').addEventListener('change', draw);
+  window.addEventListener('resize', draw);
+  draw();
+})();

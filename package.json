@@ -1,0 +1,11 @@
+{
+  "name": "big-history-lab",
+  "version": "1.0.0",
+  "description": "Visual, interactive demos for The Big History of Ideas and Innovation (IE BCSAI).",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}
